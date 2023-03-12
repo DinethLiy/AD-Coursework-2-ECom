@@ -1,0 +1,12 @@
+﻿@{
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+    ViewData["Title"] = "Super Admin";
+
+    dynamic? userName = TempData["superAdminUsername"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Super Admin Home - @userName</h1>        
+    </div>
+</body>
