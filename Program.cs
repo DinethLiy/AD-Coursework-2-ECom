@@ -1,5 +1,9 @@
+using eComMaster.Business.Interfaces.Admin;
 using eComMaster.Business.Interfaces.Auth;
+using eComMaster.Business.Interfaces.SuperAdmin;
+using eComMaster.Business.Services.Admin;
 using eComMaster.Business.Services.Auth;
+using eComMaster.Business.Services.SuperAdmin;
 using eComMaster.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -55,6 +59,8 @@ builder.Services.AddHttpContextAccessor();
 
 // Interface-Service initialization
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IManageAdminsService, ManageAdminsService>();
+builder.Services.AddScoped<IManagePcCategoriesService, ManagePcCategoriesService>();
 
 // Build App
 var app = builder.Build();

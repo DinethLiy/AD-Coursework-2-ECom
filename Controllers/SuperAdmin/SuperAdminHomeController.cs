@@ -16,7 +16,7 @@ namespace eComMaster.Controllers.SuperAdmin
 
         public IActionResult Index()
         {
-            // Get access token from cookie -> use Service to get logged in user -> parse user's username for View's display.
+            /*// Get access token from cookie -> use Service to get logged in user -> parse user's username for View's display.
             string? accessToken = Request.Cookies["access_token"];
             accessToken ??= "empty";
             var foundUser = _authService.GetLoggedInUser(accessToken);
@@ -25,9 +25,14 @@ namespace eComMaster.Controllers.SuperAdmin
             {
                 name = foundUser.USERNAME;
             }
-            TempData["superAdminUsername"] = name;
+            TempData["superAdminUsername"] = name;*/
 
             return View("../../Views/SuperAdmin/SuperAdminHome");
+        }
+
+        public RedirectToActionResult ShowAdmins()
+        {
+            return RedirectToAction("Index", "ManageAdmins");
         }
     }
 }

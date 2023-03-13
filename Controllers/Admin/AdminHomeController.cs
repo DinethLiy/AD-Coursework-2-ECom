@@ -8,5 +8,10 @@ namespace eComMaster.Controllers.Admin
         {
             return View("../../Views/Admin/AdminHome");
         }
+
+        public RedirectToActionResult ShowPcCategories()
+        {
+            return RedirectToAction("Index", "ManagePcCategories");
+        }
     }
 }

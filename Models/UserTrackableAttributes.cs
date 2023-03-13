@@ -13,12 +13,10 @@ namespace eComMaster.Models
 
 		[ForeignKey("ModifiedBy")]
 		public AuthUser? MODIFIED_BY { get; set; }
-		[Required]
 		public DateTime? MODIFIED_DATE { get; set; }
 
 		[ForeignKey("DeletedBy")]
 		public AuthUser? DELETED_BY { get; set; }
-		[Required]
 		public DateTime? DELETED_DATE { get; set; }
 	}
 }

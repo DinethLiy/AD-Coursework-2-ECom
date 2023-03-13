@@ -1,0 +1,87 @@
+﻿@using eComMaster.Data.Utility
+@{
+    ViewData["Title"] = "Add/Edit PC Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    dynamic? selectedCategory = TempData["selectedCategory"];
+}
+<body>
+    @if (selectedCategory == null)
+    {
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Add PC Category</h1>
+            @Html.ValidationSummary()
+        </div>
+
+        <!-- Form Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Category Details</h6>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("AddPcCategory", "ManagePcCategories")" method="post" class="form-group">
+                        <div class="mb-3">
+                            <label class="form-label">PC Category Name</label>
+                            <input type="text" name="categoryName" id="categoryName" placeholder="Name..." class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">PC Category Description (Optional)</label>
+                            <input type="text" name="categoryDesc" id="categoryDesc" placeholder="Description..." class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Edit PC Category</h1>
+            @Html.ValidationSummary()
+        </div>
+
+        <!-- Navigation Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Category Details</h6>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("EditPcCategory", "ManagePcCategories")" method="post" class="form-group">
+                        <div>
+                            <input type="hidden" name="pcCategoryId" id="pcCategoryId" value="@selectedCategory.PC_CATEGORY_ID" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">PC Category Name</label>
+                            <input type="text" name="categoryName" id="categoryName" placeholder="Name..." value="@selectedCategory.PC_CATEGORY_NAME" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">PC Category Description (Optional)</label>
+                            <input type="text" name="categoryDesc" id="categoryDesc" placeholder="Description..." value="@selectedCategory.PC_CATEGORY_DESCRIPTION" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" id="status" class="custom-select">
+                                @foreach (var status in Enum.GetValues(typeof(AppConstants.MainStatuses)))
+                                {
+                                    if (status.ToString() == selectedCategory.PC_CATEGORY_STATUS)
+                                    {
+                                        <option value="@status" selected="selected">@status</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@status">@status</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</body>
