@@ -61,6 +61,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IManageAdminsService, ManageAdminsService>();
 builder.Services.AddScoped<IManagePcCategoriesService, ManagePcCategoriesService>();
+builder.Services.AddScoped<IManagePcSeriesService, ManagePcSeriesService>();
 
 // Build App
 var app = builder.Build();

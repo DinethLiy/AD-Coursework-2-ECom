@@ -1,0 +1,65 @@
+﻿@model IEnumerable<eComMaster.Models.MasterData.ConfigItems.ConfigCasing>
+@{
+    ViewData["Title"] = "View PC Casings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int configCasingId = 0;
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Manage PC Casings</h1>
+        <a class="btn btn-success btn-icon-split" asp-action="ShowAddEditConfigCasing" asp-route-configCasingId=-1 asp-controller="ManageConfigCasing">
+            <span class="text">Create Casing</span>
+        </a>
+    </div>
+
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Casings</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Base Price</th>
+                            <th>Status</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var casing in Model)
+                        {
+                            configCasingId = casing.CONFIG_CASING_ID;
+                            <tr>
+                                <td>@casing.CONFIG_CASING_ID</td>
+                                <td>@casing.CASING_NAME</td>
+                                <td>@casing.CASING_DESCRIPTION</td>
+                                <td>@casing.BASE_PRICE</td>
+                                <td>@casing.CASING_STATUS</td>
+                                <td>
+                                    <center>
+                                        <a class="btn btn-info btn-icon-split" asp-action="ShowAddEditConfigCasing" asp-route-configCasingId=@configCasingId asp-controller="ManageConfigCasing">
+                                            <span class="text">Edit</span>
+                                        </a>
+                                    </center>
+                                </td>
+                                <td>
+                                    <center>
+                                        <a class="btn btn-danger btn-icon-split" asp-action="ShowDeleteConfigCasing" asp-route-configCasingId=@configCasingId asp-controller="ManageConfigCasing">
+                                            <span class="text">Delete</span>
+                                        </a>
+                                    </center>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>

@@ -13,5 +13,10 @@ namespace eComMaster.Controllers.Admin
         {
             return RedirectToAction("Index", "ManagePcCategories");
         }
+
+        public RedirectToActionResult ShowPcSeries()
+        {
+            return RedirectToAction("Index", "ManagePcSeries");
+        }
     }
 }

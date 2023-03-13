@@ -50,13 +50,8 @@ namespace eComMaster.Business.Services.Admin
                 CREATED_BY = foundUser,
                 CREATED_DATE = DateTime.Now,
             };
-            if (categoryDesc != null)
-            {
-                newCategory.PC_CATEGORY_DESCRIPTION = categoryDesc;
-            }
+            newCategory.PC_CATEGORY_DESCRIPTION = categoryDesc;
             _context.PcCategory.Add(newCategory);
-            _context.SaveChanges();
-            return "success";
             try
             {
                 _context.SaveChanges();
@@ -76,10 +71,7 @@ namespace eComMaster.Business.Services.Admin
                         .FirstOrDefault();
             foundCategory.PC_CATEGORY_NAME = categoryName;
             foundCategory.PC_CATEGORY_STATUS = status;
-            if (categoryDesc != null) 
-            {
-                foundCategory.PC_CATEGORY_DESCRIPTION = categoryDesc;
-            }
+            foundCategory.PC_CATEGORY_DESCRIPTION = categoryDesc;
             foundCategory.MODIFIED_BY = foundUser;
             foundCategory.MODIFIED_DATE = DateTime.Now;
             try

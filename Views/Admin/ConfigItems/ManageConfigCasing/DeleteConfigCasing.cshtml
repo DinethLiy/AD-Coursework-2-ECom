@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Delete PC Casing";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    dynamic? selectedCasing = TempData["selectedCasing"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Are you sure you want to delete this casing?</h1><br>
+    </div>
+
+    <!-- Details Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Casing Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3"><label class="form-label">PC Casing ID: @selectedCasing.CONFIG_CASING_ID</label></div>
+                <div class="mb-3"><label class="form-label">PC Casing Name: @selectedCasing.CASING_NAME</label></div>
+                <div class="mb-3"><label class="form-label">PC Casing Description: @selectedCasing.CASING_DESCRIPTION</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedCasing.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">PC Casing Status: @selectedCasing.CASING_STATUS</label></div>
+                <div class="mb-3">
+                    <a class="btn btn-danger btn-icon-split" asp-action="DeletePcCasing" asp-route-pcCasingId=@selectedCasing.CONFIG_CASING_ID asp-controller="ManagePcCasing">
+                        <span class="text">Yes</span>
+                    </a>
+                    <a class="btn btn-info btn-icon-split" asp-action="Index" asp-controller="ManagePcCasing">
+                        <span class="text">No</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
