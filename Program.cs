@@ -1,8 +1,10 @@
 using eComMaster.Business.Interfaces.Admin;
 using eComMaster.Business.Interfaces.Auth;
+using eComMaster.Business.Interfaces.Home;
 using eComMaster.Business.Interfaces.SuperAdmin;
 using eComMaster.Business.Services.Admin;
 using eComMaster.Business.Services.Auth;
+using eComMaster.Business.Services.Home;
 using eComMaster.Business.Services.SuperAdmin;
 using eComMaster.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -62,7 +64,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IManageAdminsService, ManageAdminsService>();
 builder.Services.AddScoped<IManagePcCategoriesService, ManagePcCategoriesService>();
 builder.Services.AddScoped<IManagePcSeriesService, ManagePcSeriesService>();
-
+builder.Services.AddScoped<IManageHomeService, ManageHomeService>();
 // Build App
 var app = builder.Build();
 

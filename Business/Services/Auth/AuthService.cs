@@ -101,7 +101,7 @@ namespace eComMaster.Business.Services.Auth
 			}
 			else
 			{
-				return "CustomerProfile";
+				return "Home";
 			}
 		}
 	}
