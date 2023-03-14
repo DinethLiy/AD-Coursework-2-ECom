@@ -31,6 +31,7 @@
     <Folder Include="Controllers\Home\" />
     <Folder Include="Business\Services\Home\" />
     <Folder Include="Business\Interfaces\Home\" />
+    <Folder Include="Views\Home\Series\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,5 +39,6 @@
     <None Remove="Controllers\Home\" />
     <None Remove="Business\Services\Home\" />
     <None Remove="Business\Interfaces\Home\" />
+    <None Remove="Views\Home\Series\" />
   </ItemGroup>
 </Project>
