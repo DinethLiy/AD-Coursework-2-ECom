@@ -66,7 +66,7 @@ builder.Services.AddScoped<IManagePcCategoriesService, ManagePcCategoriesService
 builder.Services.AddScoped<IManagePcSeriesService, ManagePcSeriesService>();
 builder.Services.AddScoped<IManageHomeService, ManageHomeService>();
 builder.Services.AddScoped<IManageSeriesService, ManageSeriesService>();
-
+builder.Services.AddScoped<IManageModelService, ManageModelService>();
 // Build App
 var app = builder.Build();
 

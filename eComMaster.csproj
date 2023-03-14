@@ -32,6 +32,7 @@
     <Folder Include="Business\Services\Home\" />
     <Folder Include="Business\Interfaces\Home\" />
     <Folder Include="Views\Home\Series\" />
+    <Folder Include="Views\Home\PcModel\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,5 +41,6 @@
     <None Remove="Business\Services\Home\" />
     <None Remove="Business\Interfaces\Home\" />
     <None Remove="Views\Home\Series\" />
+    <None Remove="Views\Home\PcModel\" />
   </ItemGroup>
 </Project>

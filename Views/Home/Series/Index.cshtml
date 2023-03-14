@@ -13,6 +13,10 @@
                 <p class="card-text">PC_SERIES_DESCRIPTION: @series.PC_SERIES_DESCRIPTION</p>
                 <p class="card-text">PC_SERIES_STATUS: @series.PC_SERIES_STATUS</p>
             </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" href="@Url.Action("Index", "PcModel", new { seriesId = series.PC_SERIES_ID })">Show available models</a>
+            </div>
+
         </div>
     }
 </div>
