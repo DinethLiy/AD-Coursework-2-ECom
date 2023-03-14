@@ -19,11 +19,13 @@ namespace eComMaster.Business.Services.Home
           //  this._categoryId = categoryId;
         }
         public List<PcSeries> GetPcSeries(string categoryId) {
+            int categoryIdInt = Convert.ToInt32(categoryId);
             var seriesList = applicationDbContext.PcSeries
-                            .Where(x => x.PC_CATEGORY_ID.PC_CATEGORY_ID.Equals(categoryId) &&
-                                        x.PC_SERIES_STATUS != "INA" &&
-                                        x.DELETED_BY == null)
-                            .ToList();
+                .Where(x => x.PC_CATEGORY_ID.PC_CATEGORY_ID == categoryIdInt &&
+                            x.PC_SERIES_STATUS != "INA" &&
+                            x.DELETED_BY == null)
+                .ToList();
+
 
             return seriesList;
         }
