@@ -1,22 +1,37 @@
 ﻿@model List<eComMaster.Models.MasterData.PcModel>
-
-<h1>Available Models</h1>
-<p>Models available for series: @Model.FirstOrDefault()?.PC_SERIES_ID.PC_SERIES_NAME</p>
-<div style="overflow-x: scroll; white-space: nowrap;">
-    @foreach (var pcModel in Model)
-    {
-        <div class="card" style="display: inline-block; margin-right: 10px;">
-            <div class="card-header">
-                <h5 class="card-title">PC_MODEL_ID: @pcModel.PC_MODEL_ID</h5>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Available Models</h1>
+    <p>Models available for series: @Model.FirstOrDefault()?.PC_SERIES_ID.PC_SERIES_NAME</p>
+    <script>$(document).ready(function () {
+            // use sessionStorage here
+            sessionStorage.setItem('myData', 'Hello World');
+            var myData = sessionStorage.getItem('myData');
+            console.log(myData);
+        });</script>
+    <div style="overflow-x: scroll; white-space: nowrap;">
+        @foreach (var pcModel in Model)
+        {
+            <div class="card" style="display: inline-block; margin-right: 10px;">
+                <div class="card-header">
+                    <h5 class="card-title">PC_MODEL_ID: @pcModel.PC_MODEL_ID</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">PC_MODEL_NAME: @pcModel.PC_MODEL_NAME</h6>
+                    <p class="card-text">PC_MODEL_DESCRIPTION: @pcModel.PC_MODEL_DESCRIPTION</p>
+                    <p class="card-text">MODEL_PRICE: @pcModel.MODEL_PRICE</p>
+                    <p class="card-text">QUANTITY: @pcModel.QUANTITY</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("View", "PcModel", new { id = pcModel.PC_MODEL_ID })" class="btn btn-primary">View Model</a>
+                </div>
             </div>
-            <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">PC_MODEL_NAME: @pcModel.PC_MODEL_NAME</h6>
-                <p class="card-text">PC_MODEL_DESCRIPTION: @pcModel.PC_MODEL_DESCRIPTION</p>
-                <p class="card-text">MODEL_PRICE: @pcModel.MODEL_PRICE</p>
-                <p class="card-text">QUANTITY: @pcModel.QUANTITY</p>
-            </div>
-        </div>
-    }
-</div>
-<br />
-<a class="btn btn-secondary" href="@Url.Action("Index", "Home")">Back to series list</a>
+        }
+    </div>
+    <br />
+    <a class="btn btn-secondary" href="@Url.Action("Index", "Home")">Back to series list</a>
+</body>
+</html>

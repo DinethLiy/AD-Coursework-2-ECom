@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using eComMaster.Business.Interfaces.Home;
 using Microsoft.AspNetCore.Mvc;
 
+
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace eComMaster.Controllers.Home
@@ -22,11 +23,11 @@ namespace eComMaster.Controllers.Home
         // GET: /<controller>/
         public IActionResult Index(string categoryId)
         {
-           //string jsCode = "<script>alert('My message');</script>";
 
-            // return a ContentResult with the JavaScript code
+            
+            //string jsCode = "<string>alert('Hello World');</script>";
             //return Content(jsCode, "text/html");
-          return View("../../Views/Home/Series/index", manageSeriesService.GetPcSeries(categoryId));
+            return View("../../Views/Home/Series/index", manageSeriesService.GetPcSeries(categoryId));
         }
     }
 }
