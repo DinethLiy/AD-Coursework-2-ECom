@@ -1,7 +1,9 @@
 using eComMaster.Business.Interfaces.Admin;
+using eComMaster.Business.Interfaces.Admin.ConfigItems;
 using eComMaster.Business.Interfaces.Auth;
 using eComMaster.Business.Interfaces.SuperAdmin;
 using eComMaster.Business.Services.Admin;
+using eComMaster.Business.Services.Admin.ConfigItems;
 using eComMaster.Business.Services.Auth;
 using eComMaster.Business.Services.SuperAdmin;
 using eComMaster.Data;
@@ -58,10 +60,23 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpContextAccessor();
 
 // Interface-Service initialization
+// Auth
 builder.Services.AddScoped<IAuthService, AuthService>();
+// Super Admin: Manage Accounts
 builder.Services.AddScoped<IManageAdminsService, ManageAdminsService>();
+// Admin: Manage Master Data
 builder.Services.AddScoped<IManagePcCategoriesService, ManagePcCategoriesService>();
 builder.Services.AddScoped<IManagePcSeriesService, ManagePcSeriesService>();
+// Admin: Config Item Management
+builder.Services.AddScoped<IManageConfigCasingService, ManageConfigCasingService>();
+builder.Services.AddScoped<IManageConfigDisplayService, ManageConfigDisplayService>();
+builder.Services.AddScoped<IManageConfigGraphicsService, ManageConfigGraphicsService>();
+builder.Services.AddScoped<IManageConfigMemoryService, ManageConfigMemoryService>();
+builder.Services.AddScoped<IManageConfigMiscService, ManageConfigMiscService>();
+builder.Services.AddScoped<IManageConfigPortsService, ManageConfigPortsService>();
+builder.Services.AddScoped<IManageConfigPowerService, ManageConfigPowerService>();
+builder.Services.AddScoped<IManageConfigProcessorService, ManageConfigProcessorService>();
+builder.Services.AddScoped<IManageConfigStorageService, ManageConfigStorageService>();
 
 // Build App
 var app = builder.Build();

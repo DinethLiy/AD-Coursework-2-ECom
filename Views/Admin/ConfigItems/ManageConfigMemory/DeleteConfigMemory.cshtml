@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Delete PC Memory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    dynamic? selectedMemory = TempData["selectedMemory"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Are you sure you want to delete this memory?</h1><br>
+    </div>
+
+    <!-- Details Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Memory Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3"><label class="form-label">PC Memory ID: @selectedMemory.CONFIG_MEMORY_ID</label></div>
+                <div class="mb-3"><label class="form-label">PC Memory Name: @selectedMemory.MEMORY_NAME</label></div>
+                <div class="mb-3"><label class="form-label">PC Memory Description: @selectedMemory.MEMORY_DESCRIPTION</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedMemory.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">PC Memory Status: @selectedMemory.MEMORY_STATUS</label></div>
+                <div class="mb-3">
+                    <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigMemory" asp-route-pcMemoryId=@selectedMemory.CONFIG_MEMORY_ID asp-controller="AdminManageConfigMemory">
+                        <span class="text">Yes</span>
+                    </a>
+                    <a class="btn btn-info btn-icon-split" asp-action="Index" asp-controller="AdminManageConfigMemory">
+                        <span class="text">No</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

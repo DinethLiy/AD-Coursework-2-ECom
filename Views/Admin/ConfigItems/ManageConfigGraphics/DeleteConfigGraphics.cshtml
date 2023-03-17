@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Delete PC Graphics";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    dynamic? selectedGraphics = TempData["selectedGraphics"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Are you sure you want to delete this graphics?</h1><br>
+    </div>
+
+    <!-- Details Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Graphics Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3"><label class="form-label">PC Graphics ID: @selectedGraphics.CONFIG_GRAPHICS_ID</label></div>
+                <div class="mb-3"><label class="form-label">PC Graphics Name: @selectedGraphics.GRAPHICS_NAME</label></div>
+                <div class="mb-3"><label class="form-label">PC Graphics Description: @selectedGraphics.GRAPHICS_DESCRIPTION</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedGraphics.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">PC Graphics Status: @selectedGraphics.GRAPHICS_STATUS</label></div>
+                <div class="mb-3">
+                    <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigGraphics" asp-route-pcGraphicsId=@selectedGraphics.CONFIG_GRAPHICS_ID asp-controller="AdminManageConfigGraphics">
+                        <span class="text">Yes</span>
+                    </a>
+                    <a class="btn btn-info btn-icon-split" asp-action="Index" asp-controller="AdminManageConfigGraphics">
+                        <span class="text">No</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

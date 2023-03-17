@@ -18,5 +18,10 @@ namespace eComMaster.Controllers.Admin
         {
             return RedirectToAction("Index", "ManagePcSeries");
         }
+
+        public RedirectToActionResult ShowConfigCasing()
+        {
+            return RedirectToAction("Index", "AdminManageConfigCasing");
+        }
     }
 }

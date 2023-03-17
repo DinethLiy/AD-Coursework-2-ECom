@@ -1,15 +1,15 @@
 ﻿@using eComMaster.Data.Utility
 @{
-    ViewData["Title"] = "Add/Edit PC Casing";
+    ViewData["Title"] = "Add/Edit PC Storage";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    dynamic? selectedCasing = TempData["selectedCasing"];
+    dynamic? selectedStorage = TempData["selectedStorage"];
 }
 <body>
-    @if (selectedCasing == null)
+    @if (selectedStorage == null)
     {
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Add PC Casing</h1>
+            <h1 class="h3 mb-0 text-gray-800">Add PC Storage</h1>
             @Html.ValidationSummary()
         </div>
 
@@ -17,17 +17,17 @@
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Casing Details</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Storage Details</h6>
                 </div>
                 <div class="card-body">
-                    <form action="@Url.Action("AddConfigCasing", "AdminManageConfigCasing")" method="post" class="form-group">
+                    <form action="@Url.Action("AddConfigStorage", "AdminManageConfigStorage")" method="post" class="form-group">
                         <div class="mb-3">
-                            <label class="form-label">PC Casing Name</label>
-                            <input type="text" name="casingName" id="casingName" placeholder="Name..." class="form-control" required>
+                            <label class="form-label">PC Storage Name</label>
+                            <input type="text" name="storageName" id="storageName" placeholder="Name..." class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">PC Casing Description (Optional)</label>
-                            <input type="text" name="casingDesc" id="casingDesc" placeholder="Description..." class="form-control">
+                            <label class="form-label">PC Storage Description (Optional)</label>
+                            <input type="text" name="storageDesc" id="storageDesc" placeholder="Description..." class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Base Price</label>
@@ -43,7 +43,7 @@
     {
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Edit PC Casing</h1>
+            <h1 class="h3 mb-0 text-gray-800">Edit PC Storage</h1>
             @Html.ValidationSummary()
         </div>
 
@@ -51,31 +51,31 @@
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Casing Details</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Storage Details</h6>
                 </div>
                 <div class="card-body">
-                    <form action="@Url.Action("EditConfigCasing", "AdminManageConfigCasing")" method="post" class="form-group">
+                    <form action="@Url.Action("EditConfigStorage", "AdminManageConfigStorage")" method="post" class="form-group">
                         <div>
-                            <input type="hidden" name="pcCasingId" id="pcCasingId" value="@selectedCasing.CONFIG_CASING_ID" class="form-control">
+                            <input type="hidden" name="pcStorageId" id="pcStorageId" value="@selectedStorage.CONFIG_STORAGE_ID" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">PC Casing Name</label>
-                            <input type="text" name="casingName" id="casingName" placeholder="Name..." value="@selectedCasing.CASING_NAME" class="form-control" required>
+                            <label class="form-label">PC Storage Name</label>
+                            <input type="text" name="storageName" id="storageName" placeholder="Name..." value="@selectedStorage.STORAGE_NAME" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">PC Casing Description (Optional)</label>
-                            <input type="text" name="casingDesc" id="casingDesc" placeholder="Description..." value="@selectedCasing.CASING_DESCRIPTION" class="form-control">
+                            <label class="form-label">PC Storage Description (Optional)</label>
+                            <input type="text" name="storageDesc" id="storageDesc" placeholder="Description..." value="@selectedStorage.STORAGE_DESCRIPTION" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Base Price</label>
-                            <input type="number" name="price" id="price" min="0" max="99999999" step="0.01" value="@selectedCasing.BASE_PRICE" class="form-control" required>
+                            <input type="number" name="price" id="price" min="0" max="99999999" step="0.01" value="@selectedStorage.BASE_PRICE" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Status</label>
                             <select name="status" id="status" class="custom-select">
                                 @foreach (var status in Enum.GetValues(typeof(AppConstants.MainStatuses)))
                                 {
-                                    if (status.ToString() == selectedCasing.CASING_STATUS)
+                                    if (status.ToString() == selectedStorage.STORAGE_STATUS)
                                     {
                                         <option value="@status" selected="selected">@status</option>
                                     }

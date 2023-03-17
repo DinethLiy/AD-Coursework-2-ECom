@@ -22,10 +22,10 @@
                 <div class="mb-3"><label class="form-label">Base Price: @selectedCasing.BASE_PRICE</label></div>
                 <div class="mb-3"><label class="form-label">PC Casing Status: @selectedCasing.CASING_STATUS</label></div>
                 <div class="mb-3">
-                    <a class="btn btn-danger btn-icon-split" asp-action="DeletePcCasing" asp-route-pcCasingId=@selectedCasing.CONFIG_CASING_ID asp-controller="ManagePcCasing">
+                    <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigCasing" asp-route-pcCasingId=@selectedCasing.CONFIG_CASING_ID asp-controller="AdminManageConfigCasing">
                         <span class="text">Yes</span>
                     </a>
-                    <a class="btn btn-info btn-icon-split" asp-action="Index" asp-controller="ManagePcCasing">
+                    <a class="btn btn-info btn-icon-split" asp-action="Index" asp-controller="AdminManageConfigCasing">
                         <span class="text">No</span>
                     </a>
                 </div>

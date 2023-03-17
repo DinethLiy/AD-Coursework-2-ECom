@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Delete PC Ports";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    dynamic? selectedPorts = TempData["selectedPorts"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Are you sure you want to delete this ports?</h1><br>
+    </div>
+
+    <!-- Details Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Ports Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3"><label class="form-label">PC Ports ID: @selectedPorts.CONFIG_PORTS_ID</label></div>
+                <div class="mb-3"><label class="form-label">PC Ports Name: @selectedPorts.PORTS_NAME</label></div>
+                <div class="mb-3"><label class="form-label">PC Ports Description: @selectedPorts.PORTS_DESCRIPTION</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedPorts.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">PC Ports Status: @selectedPorts.PORTS_STATUS</label></div>
+                <div class="mb-3">
+                    <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigPorts" asp-route-pcPortsId=@selectedPorts.CONFIG_PORTS_ID asp-controller="AdminManageConfigPorts">
+                        <span class="text">Yes</span>
+                    </a>
+                    <a class="btn btn-info btn-icon-split" asp-action="Index" asp-controller="AdminManageConfigPorts">
+                        <span class="text">No</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

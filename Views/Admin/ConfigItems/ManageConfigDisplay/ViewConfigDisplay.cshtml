@@ -1,22 +1,22 @@
-﻿@model IEnumerable<eComMaster.Models.MasterData.ConfigItems.ConfigCasing>
+﻿@model IEnumerable<eComMaster.Models.MasterData.ConfigItems.ConfigDisplay>
 @{
-    ViewData["Title"] = "View PC Casings";
+    ViewData["Title"] = "View PC Displays";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    int configCasingId = 0;
+    int configDisplayId = 0;
 }
 <body>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Manage PC Casings</h1>
-        <a class="btn btn-success btn-icon-split" asp-action="ShowAddEditConfigCasing" asp-route-casingId=-1 asp-controller="AdminManageConfigCasing">
-            <span class="text">Create Casing</span>
+        <h1 class="h3 mb-0 text-gray-800">Manage PC Displays</h1>
+        <a class="btn btn-success btn-icon-split" asp-action="ShowAddEditConfigDisplay" asp-route-displayId=-1 asp-controller="AdminManageConfigDisplay">
+            <span class="text">Create Display</span>
         </a>
     </div>
 
     <div class="col">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Casings</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Displays</h6>
             </div>
             <div class="card-body">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -32,25 +32,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var casing in Model)
+                        @foreach (var display in Model)
                         {
-                            configCasingId = casing.CONFIG_CASING_ID;
+                            configDisplayId = display.CONFIG_DISPLAY_ID;
                             <tr>
-                                <td>@casing.CONFIG_CASING_ID</td>
-                                <td>@casing.CASING_NAME</td>
-                                <td>@casing.CASING_DESCRIPTION</td>
-                                <td>@casing.BASE_PRICE</td>
-                                <td>@casing.CASING_STATUS</td>
+                                <td>@display.CONFIG_DISPLAY_ID</td>
+                                <td>@display.DISPLAY_NAME</td>
+                                <td>@display.DISPLAY_DESCRIPTION</td>
+                                <td>@display.BASE_PRICE</td>
+                                <td>@display.DISPLAY_STATUS</td>
                                 <td>
                                     <center>
-                                        <a class="btn btn-info btn-icon-split" asp-action="ShowAddEditConfigCasing" asp-route-casingId=@configCasingId asp-controller="AdminManageConfigCasing">
+                                        <a class="btn btn-info btn-icon-split" asp-action="ShowAddEditConfigDisplay" asp-route-displayId=@configDisplayId asp-controller="AdminManageConfigDisplay">
                                             <span class="text">Edit</span>
                                         </a>
                                     </center>
                                 </td>
                                 <td>
                                     <center>
-                                        <a class="btn btn-danger btn-icon-split" asp-action="ShowDeleteConfigCasing" asp-route-casingId=@configCasingId asp-controller="AdminManageConfigCasing">
+                                        <a class="btn btn-danger btn-icon-split" asp-action="ShowDeleteConfigDisplay" asp-route-displayId=@configDisplayId asp-controller="AdminManageConfigDisplay">
                                             <span class="text">Delete</span>
                                         </a>
                                     </center>
