@@ -1,0 +1,18 @@
+﻿@model eComMaster.Models.MasterData.PcModel
+
+<h1>PC Model Details</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">PC_MODEL_ID: @Model.PC_MODEL_ID</h5>
+    </div>
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">PC_MODEL_NAME: @Model.PC_MODEL_NAME</h6>
+        <p class="card-text">PC_MODEL_DESCRIPTION: @Model.PC_MODEL_DESCRIPTION</p>
+        <p class="card-text">MODEL_PRICE: @Model.MODEL_PRICE</p>
+        <p class="card-text">QUANTITY: @Model.QUANTITY</p>
+    </div>
+    <div class="card-footer">
+        <a href="@Url.Action("Index", "PcModel", new { seriesId = Model.PC_SERIES_ID })" class="btn btn-secondary">Back to Models</a>
+    </div>
+</div>

@@ -1,10 +1,12 @@
 using eComMaster.Business.Interfaces.Admin;
 using eComMaster.Business.Interfaces.Admin.ConfigItems;
 using eComMaster.Business.Interfaces.Auth;
+using eComMaster.Business.Interfaces.Home;
 using eComMaster.Business.Interfaces.SuperAdmin;
 using eComMaster.Business.Services.Admin;
 using eComMaster.Business.Services.Admin.ConfigItems;
 using eComMaster.Business.Services.Auth;
+using eComMaster.Business.Services.Home;
 using eComMaster.Business.Services.SuperAdmin;
 using eComMaster.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -77,6 +79,10 @@ builder.Services.AddScoped<IManageConfigPortsService, ManageConfigPortsService>(
 builder.Services.AddScoped<IManageConfigPowerService, ManageConfigPowerService>();
 builder.Services.AddScoped<IManageConfigProcessorService, ManageConfigProcessorService>();
 builder.Services.AddScoped<IManageConfigStorageService, ManageConfigStorageService>();
+// Customer
+builder.Services.AddScoped<IManageHomeService, ManageHomeService>();
+builder.Services.AddScoped<IManageSeriesService, ManageSeriesService>();
+builder.Services.AddScoped<IManageModelService, ManageModelService>();
 
 // Build App
 var app = builder.Build();
