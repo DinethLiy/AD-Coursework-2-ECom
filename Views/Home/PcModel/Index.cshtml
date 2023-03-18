@@ -1,17 +1,12 @@
 ﻿@model List<eComMaster.Models.MasterData.PcModel>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   
 </head>
 <body>
     <h1>Available Models</h1>
     <p>Models available for series: @Model.FirstOrDefault()?.PC_SERIES_ID.PC_SERIES_NAME</p>
-    <script>$(document).ready(function () {
-            // use sessionStorage here
-            sessionStorage.setItem('myData', 'Hello World');
-            var myData = sessionStorage.getItem('myData');
-            console.log(myData);
-        });</script>
+   
     <div style="overflow-x: scroll; white-space: nowrap;">
         @foreach (var pcModel in Model)
         {

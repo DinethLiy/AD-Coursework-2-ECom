@@ -1,6 +1,4 @@
-﻿@model eComMaster.Models.MasterData.PcModel
-
-<h1>PC Model Details</h1>
+﻿<h1>PC Model Details</h1>
 
 <div class="card">
     <div class="card-header">
@@ -11,8 +9,64 @@
         <p class="card-text">PC_MODEL_DESCRIPTION: @Model.PC_MODEL_DESCRIPTION</p>
         <p class="card-text">MODEL_PRICE: @Model.MODEL_PRICE</p>
         <p class="card-text">QUANTITY: @Model.QUANTITY</p>
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+        </div>
     </div>
     <div class="card-footer">
+        <button class="btn btn-primary" onclick="addToCart()" id="addToCartBtn">Add to Cart</button>
         <a href="@Url.Action("Index", "PcModel", new { seriesId = Model.PC_SERIES_ID })" class="btn btn-secondary">Back to Models</a>
+        <a href="@Url.Action("Index", "Cart")" class="btn btn-success">View Cart</a>
     </div>
 </div>
+
+<script>
+    // Check if the PC model is already in the cart when the page loads
+    if (typeof(Storage) !== "undefined" && sessionStorage.getItem('pcModel')) {
+        var pcModel = JSON.parse(sessionStorage.getItem('pcModel'));
+        if (pcModel.id == '@Model.PC_MODEL_ID') {
+            document.getElementById('addToCartBtn').innerText = 'Remove from Cart';
+        }
+    }
+
+    function addToCart() {
+        // Get the PC model details and quantity
+        var pcModel = {
+            id: @Model.PC_MODEL_ID,
+            name: '@Model.PC_MODEL_NAME',
+            description: '@Model.PC_MODEL_DESCRIPTION',
+            price: @Model.MODEL_PRICE,
+            quantity: document.getElementById('quantity').value
+        };
+
+        // Check if the PC model is already in the cart
+        if (typeof(Storage) !== "undefined" && sessionStorage.getItem('pcModel')) {
+            var existingPcModel = JSON.parse(sessionStorage.getItem('pcModel'));
+            if (existingPcModel.id == pcModel.id) {
+                // Remove the PC model from the cart
+                sessionStorage.removeItem('pcModel');
+
+                // Update the button text
+                document.getElementById('addToCartBtn').innerText = 'Add to Cart';
+
+                // Alert the user that the PC model was removed from the cart
+                alert('PC model removed from cart!');
+                return;
+            }
+        }
+
+        // Store the PC model details in sessionStorage
+        if (typeof(Storage) !== "undefined") {
+            sessionStorage.setItem('pcModel', JSON.stringify(pcModel));
+
+            // Update the button text
+            document.getElementById('addToCartBtn').innerText = 'Remove from Cart';
+
+            // Alert the user that the PC model was added to the cart
+            alert('PC model added to cart!');
+        } else {
+            alert('Sorry, your browser does not support web storage. Please upgrade your browser or try a different one.');
+        }
+    }
+</script>
