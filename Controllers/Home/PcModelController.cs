@@ -30,8 +30,7 @@ namespace eComMaster.Controllers.Home
         // GET: PcModel/View/5
         public ActionResult View(int id)
         {
-           // var myData = sessionStorage.getItem('myData');
-
+           
             return View("../../Views/Home/PcModel/View", _manageModelService.getPcModelForId(id));
         }
 

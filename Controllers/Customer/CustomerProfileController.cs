@@ -6,6 +6,7 @@ namespace eComMaster.Controllers.Customer
     {
         public IActionResult Index()
         {
+           
             return View("../../Views/CustomerProfile/CustomerProfileView");
         }
     }
