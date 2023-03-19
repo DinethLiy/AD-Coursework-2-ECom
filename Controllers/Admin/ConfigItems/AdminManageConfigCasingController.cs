@@ -1,12 +1,14 @@
 ﻿using eComMaster.Business.Interfaces.Admin;
 using eComMaster.Business.Interfaces.Admin.ConfigItems;
 using eComMaster.Business.Services.Admin;
+using eComMaster.Data.Utility;
 using eComMaster.Models.MasterData;
 using eComMaster.Models.MasterData.ConfigItems;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eComMaster.Controllers.Admin.ConfigItems
 {
+    [Authorization(RequiredPrivilegeType = "ADMIN")]
     public class AdminManageConfigCasingController : Controller
     {
         private readonly IManageConfigCasingService _manageConfigCasingService;

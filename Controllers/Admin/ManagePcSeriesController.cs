@@ -1,11 +1,13 @@
 ﻿using eComMaster.Business.Interfaces.Admin;
 using eComMaster.Business.Services.Admin;
+using eComMaster.Data.Utility;
 using eComMaster.Models.MasterData;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
 namespace eComMaster.Controllers.Admin
 {
+    [Authorization(RequiredPrivilegeType = "ADMIN")]
     public class ManagePcSeriesController : Controller
     {
         private readonly IManagePcSeriesService _managePcSeriesService;

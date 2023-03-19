@@ -1,11 +1,13 @@
 ﻿using eComMaster.Business.Interfaces.Auth;
 using eComMaster.Business.Interfaces.SuperAdmin;
+using eComMaster.Data.Utility;
 using eComMaster.Models.Auth;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
 namespace eComMaster.Controllers.SuperAdmin
 {
+    [Authorization(RequiredPrivilegeType = "SUPER_ADMIN")]
     public class ManageAdminsController : Controller
     {
         private readonly IManageAdminsService _manageAdminsService;

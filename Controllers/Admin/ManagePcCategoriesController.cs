@@ -1,4 +1,5 @@
 ﻿using eComMaster.Business.Interfaces.Admin;
+using eComMaster.Data.Utility;
 using eComMaster.Models.Auth;
 using eComMaster.Models.MasterData;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using System.Collections;
 
 namespace eComMaster.Controllers.Admin
 {
+    [Authorization(RequiredPrivilegeType = "ADMIN")]
     public class ManagePcCategoriesController : Controller
     {
         private readonly IManagePcCategoriesService _managePcCategoriesService;
