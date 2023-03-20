@@ -21,6 +21,6 @@ namespace eComMaster.Models.CustomerData
         [Required]
         public Decimal AMOUNT { get; set; } = 0.0M;
         [Required]
-        public string PAYMENT_STATUS { get; set; } = "PENDING";
+        public string PAYMENT_STATUS { get; set; } = "ACT";
     }
 }

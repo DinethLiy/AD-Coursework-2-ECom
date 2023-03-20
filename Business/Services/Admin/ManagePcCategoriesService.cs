@@ -26,6 +26,7 @@ namespace eComMaster.Business.Services.Admin
                 .ToList();
         }
 
+        // Get data needed for the views
         public PcCategory? GetTempDataForAddEditPcCategory(int pcCategoryId)
         {
             if (pcCategoryId != -1)

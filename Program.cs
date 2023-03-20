@@ -66,9 +66,16 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IAuthService, AuthService>();
 // Super Admin: Manage Accounts
 builder.Services.AddScoped<IManageAdminsService, ManageAdminsService>();
+// Admin: Home
+builder.Services.AddScoped<IAdminHomeService, AdminHomeService>();
 // Admin: Manage Master Data
 builder.Services.AddScoped<IManagePcCategoriesService, ManagePcCategoriesService>();
 builder.Services.AddScoped<IManagePcSeriesService, ManagePcSeriesService>();
+builder.Services.AddScoped<IManagePcModelService, ManagePcModelService>();
+builder.Services.AddScoped<IManageOrderService, ManageOrderService>();
+builder.Services.AddScoped<IAdminViewPaymentService, AdminViewPaymentService>();
+// Admin: Reports
+builder.Services.AddScoped<IReportService, ReportService>();
 // Admin: Config Item Management
 builder.Services.AddScoped<IManageConfigCasingService, ManageConfigCasingService>();
 builder.Services.AddScoped<IManageConfigDisplayService, ManageConfigDisplayService>();

@@ -19,7 +19,7 @@
                 <div class="mb-3"><label class="form-label">PC Ports ID: @selectedPorts.CONFIG_PORTS_ID</label></div>
                 <div class="mb-3"><label class="form-label">PC Ports Name: @selectedPorts.PORTS_NAME</label></div>
                 <div class="mb-3"><label class="form-label">PC Ports Description: @selectedPorts.PORTS_DESCRIPTION</label></div>
-                <div class="mb-3"><label class="form-label">Base Price: @selectedPorts.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedPorts.BASE_PRICE.ToString("0.##")</label></div>
                 <div class="mb-3"><label class="form-label">PC Ports Status: @selectedPorts.PORTS_STATUS</label></div>
                 <div class="mb-3">
                     <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigPorts" asp-route-pcPortsId=@selectedPorts.CONFIG_PORTS_ID asp-controller="AdminManageConfigPorts">

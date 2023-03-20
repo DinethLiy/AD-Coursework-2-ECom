@@ -19,7 +19,7 @@
                 <div class="mb-3"><label class="form-label">PC Storage ID: @selectedStorage.CONFIG_STORAGE_ID</label></div>
                 <div class="mb-3"><label class="form-label">PC Storage Name: @selectedStorage.STORAGE_NAME</label></div>
                 <div class="mb-3"><label class="form-label">PC Storage Description: @selectedStorage.STORAGE_DESCRIPTION</label></div>
-                <div class="mb-3"><label class="form-label">Base Price: @selectedStorage.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedStorage.BASE_PRICE.ToString("0.##")</label></div>
                 <div class="mb-3"><label class="form-label">PC Storage Status: @selectedStorage.STORAGE_STATUS</label></div>
                 <div class="mb-3">
                     <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigStorage" asp-route-pcStorageId=@selectedStorage.CONFIG_STORAGE_ID asp-controller="AdminManageConfigStorage">

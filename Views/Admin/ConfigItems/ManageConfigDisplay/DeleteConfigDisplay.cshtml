@@ -19,7 +19,7 @@
                 <div class="mb-3"><label class="form-label">PC Display ID: @selectedDisplay.CONFIG_DISPLAY_ID</label></div>
                 <div class="mb-3"><label class="form-label">PC Display Name: @selectedDisplay.DISPLAY_NAME</label></div>
                 <div class="mb-3"><label class="form-label">PC Display Description: @selectedDisplay.DISPLAY_DESCRIPTION</label></div>
-                <div class="mb-3"><label class="form-label">Base Price: @selectedDisplay.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedDisplay.BASE_PRICE.ToString("0.##")</label></div>
                 <div class="mb-3"><label class="form-label">PC Display Status: @selectedDisplay.DISPLAY_STATUS</label></div>
                 <div class="mb-3">
                     <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigDisplay" asp-route-pcDisplayId=@selectedDisplay.CONFIG_DISPLAY_ID asp-controller="AdminManageConfigDisplay">

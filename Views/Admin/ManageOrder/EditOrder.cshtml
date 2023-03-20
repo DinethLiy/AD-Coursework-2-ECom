@@ -1,0 +1,60 @@
+﻿@using eComMaster.Data.Utility
+@{
+    ViewData["Title"] = "Manage Order";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    dynamic? selectedOrder = TempData["selectedOrder"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Manage Order</h1>
+        @Html.ValidationSummary()
+    </div>
+
+    <!-- Details Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Order Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3"><label class="form-label">Order ID: @selectedOrder.ORDER_ID</label></div>
+                <div class="mb-3"><label class="form-label">Model: @selectedOrder.PcModel.PC_MODEL_NAME</label></div>
+                <div class="mb-3"><label class="form-label">Customer: @selectedOrder.Customer.NAME</label></div>
+                <div class="mb-3"><label class="form-label">Payment: @selectedOrder.ORDER_AMOUNT.ToString("0.##")</label></div>
+                <div class="mb-3"><label class="form-label">Status: @selectedOrder.ORDER_STATUS</label></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Update Order Status</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("EditOrder", "ManageOrder")" method="post" class="form-group">
+                    <input type="hidden" name="orderId" id="orderId" value="@selectedOrder.ORDER_ID">
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select name="status" id="status" class="custom-select">
+                            @foreach (var status in Enum.GetValues(typeof(AppConstants.OrderStatuses)))
+                            {
+                                if (status.ToString() == selectedOrder.ORDER_STATUS)
+                                {
+                                    <option value="@status" selected="selected">@status</option>
+                                }
+                                else
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

@@ -24,6 +24,7 @@ namespace eComMaster.Business.Services.SuperAdmin
                 .ToList();
         }
 
+        // Get data needed for the views
         public ArrayList? GetTempDataForAddEditAdmins(int userId, string? encryptedPassword) 
         {
             ArrayList result = new();
@@ -101,5 +102,7 @@ namespace eComMaster.Business.Services.SuperAdmin
                 return encryptDecryptText.DecryptText(foundAdmin.PASSWORD);
             }
         }
+        // Admin accounts cannot be deleted by the user.
+        // Instead, they can mark accounts as "INA" (Inactive) for their USER_STATUS, which deactivates the user account.
     }
 }

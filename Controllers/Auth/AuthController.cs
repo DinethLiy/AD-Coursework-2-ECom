@@ -33,5 +33,12 @@ namespace eComMaster.Controllers.Auth
 				return RedirectToAction("Index", "Auth");
 			}
 		}
+
+		public IActionResult Logout() 
+		{
+			// Cookie containing JWT Auth key is destroyed at logout.
+            Response.Cookies.Delete("access_token");
+			return View("Login");
+        }
 	}
 }

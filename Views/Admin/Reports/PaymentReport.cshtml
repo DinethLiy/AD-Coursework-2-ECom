@@ -1,0 +1,37 @@
+﻿@model IEnumerable<eComMaster.Models.MasterData.PcModel>
+@{
+    ViewData["Title"] = "Payment History Report";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    dynamic? pcModelList = TempData["pcModelList"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Payment History Report</h1>
+        @Html.ValidationSummary()
+    </div>
+
+    <!-- Form Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Report Parameters</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("DownloadPaymentReport", "AdminReport")" method="post" class="form-group">
+                    <div class="mb-3">
+                        <label class="form-label">PC Model</label>
+                        <select name="model" id="model" class="custom-select">
+                            <option value="all" selected>All</option>
+                            @foreach (var pcModel in Model)
+                            {
+                                <option value="@pcModel.PC_MODEL_ID">@pcModel.PC_MODEL_NAME</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

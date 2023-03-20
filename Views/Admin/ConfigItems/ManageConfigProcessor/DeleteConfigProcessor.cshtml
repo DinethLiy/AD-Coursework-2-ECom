@@ -19,7 +19,7 @@
                 <div class="mb-3"><label class="form-label">PC Processor ID: @selectedProcessor.CONFIG_PROCESSOR_ID</label></div>
                 <div class="mb-3"><label class="form-label">PC Processor Name: @selectedProcessor.PROCESSOR_NAME</label></div>
                 <div class="mb-3"><label class="form-label">PC Processor Description: @selectedProcessor.PROCESSOR_DESCRIPTION</label></div>
-                <div class="mb-3"><label class="form-label">Base Price: @selectedProcessor.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedProcessor.BASE_PRICE.ToString("0.##")</label></div>
                 <div class="mb-3"><label class="form-label">PC Processor Status: @selectedProcessor.PROCESSOR_STATUS</label></div>
                 <div class="mb-3">
                     <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigProcessor" asp-route-pcProcessorId=@selectedProcessor.CONFIG_PROCESSOR_ID asp-controller="AdminManageConfigProcessor">

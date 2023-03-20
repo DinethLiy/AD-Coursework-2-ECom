@@ -15,6 +15,8 @@ namespace eComMaster.Business.Services.Auth
             this.key = key;
         }
 
+        // Creates and return a JSON Web Token (JWT),
+        // The JWT stores the logged in user's "PRIVILEGE_TYPE" attribute for authorization purposes and the the user's ID (to be used to track data creation/modification etc.)
         public string JwtAuthentication(AuthUser user)
         {
             // Set Claims for Token

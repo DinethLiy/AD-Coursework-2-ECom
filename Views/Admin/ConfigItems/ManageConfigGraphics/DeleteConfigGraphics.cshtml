@@ -19,7 +19,7 @@
                 <div class="mb-3"><label class="form-label">PC Graphics ID: @selectedGraphics.CONFIG_GRAPHICS_ID</label></div>
                 <div class="mb-3"><label class="form-label">PC Graphics Name: @selectedGraphics.GRAPHICS_NAME</label></div>
                 <div class="mb-3"><label class="form-label">PC Graphics Description: @selectedGraphics.GRAPHICS_DESCRIPTION</label></div>
-                <div class="mb-3"><label class="form-label">Base Price: @selectedGraphics.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedGraphics.BASE_PRICE.ToString("0.##")</label></div>
                 <div class="mb-3"><label class="form-label">PC Graphics Status: @selectedGraphics.GRAPHICS_STATUS</label></div>
                 <div class="mb-3">
                     <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigGraphics" asp-route-pcGraphicsId=@selectedGraphics.CONFIG_GRAPHICS_ID asp-controller="AdminManageConfigGraphics">

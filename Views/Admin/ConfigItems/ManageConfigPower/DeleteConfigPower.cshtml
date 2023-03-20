@@ -19,7 +19,7 @@
                 <div class="mb-3"><label class="form-label">PC Power ID: @selectedPower.CONFIG_POWER_ID</label></div>
                 <div class="mb-3"><label class="form-label">PC Power Name: @selectedPower.POWER_NAME</label></div>
                 <div class="mb-3"><label class="form-label">PC Power Description: @selectedPower.POWER_DESCRIPTION</label></div>
-                <div class="mb-3"><label class="form-label">Base Price: @selectedPower.BASE_PRICE</label></div>
+                <div class="mb-3"><label class="form-label">Base Price: @selectedPower.BASE_PRICE.ToString("0.##")</label></div>
                 <div class="mb-3"><label class="form-label">PC Power Status: @selectedPower.POWER_STATUS</label></div>
                 <div class="mb-3">
                     <a class="btn btn-danger btn-icon-split" asp-action="DeleteConfigPower" asp-route-pcPowerId=@selectedPower.CONFIG_POWER_ID asp-controller="AdminManageConfigPower">

@@ -1,0 +1,372 @@
+﻿@using eComMaster.Data.Utility
+@{
+    ViewData["Title"] = "Add/Edit PC Model";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var selectedModel = ViewBag.selectedModel;
+
+    var seriesList = ViewBag.seriesList;
+    var casingList = ViewBag.casingList;
+    var displayList = ViewBag.displayList;
+    var graphicsList = ViewBag.graphicsList;
+    var memoryList = ViewBag.memoryList;
+    var miscList = ViewBag.miscList;
+    var portsList = ViewBag.portsList;
+    var powerList = ViewBag.powerList;
+    var processorList = ViewBag.processorList;
+    var storageList = ViewBag.storageList;
+}
+<body>
+    @if (selectedModel == null)
+    {
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Add PC Model</h1>
+            @Html.ValidationSummary()
+        </div>
+
+        <!-- Form Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Model Details</h6>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("AddPcModel", "ManagePcModel")" method="post" class="form-group">
+                        <div class="mb-3">
+                            <label class="form-label">PC Series</label>
+                            <select name="series" id="series" class="custom-select">
+                                @foreach (var series in seriesList)
+                                {
+                                    <option value="@series.PC_SERIES_ID">@series.PC_SERIES_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">PC Model Name</label>
+                            <input type="text" name="modelName" id="modelName" placeholder="Name..." class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">PC Model Description (Optional)</label>
+                            <input type="text" name="modelDesc" id="modelDesc" placeholder="Description..." class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Model Price (Overrides Sum of Component Prices)</label>
+                            <input type="number" name="price" id="price" min="0" max="9999999" step="0.01" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quantity</label>
+                            <input type="number" name="quantity" id="quantity" min="0" max="9999" step="1" class="form-control" required>
+                        </div>
+
+                        <!-- Config Item select boxes -->
+                        <div class="mb-3">
+                            <label class="form-label">Casing</label>
+                            <select name="casing" id="casing" class="custom-select">
+                                @foreach (var casing in casingList)
+                                {
+                                    <option value="@casing.CONFIG_CASING_ID">@casing.CASING_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Display</label>
+                            <select name="display" id="display" class="custom-select">
+                                @foreach (var display in displayList)
+                                {
+                                    <option value="@display.CONFIG_DISPLAY_ID">@display.DISPLAY_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Graphics</label>
+                            <select name="graphics" id="graphics" class="custom-select">
+                                @foreach (var graphics in graphicsList)
+                                {
+                                    <option value="@graphics.CONFIG_GRAPHICS_ID">@graphics.GRAPHICS_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Memory</label>
+                            <select name="memory" id="memory" class="custom-select">
+                                @foreach (var memory in memoryList)
+                                {
+                                    <option value="@memory.CONFIG_MEMORY_ID">@memory.MEMORY_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Misc</label>
+                            <select name="misc" id="misc" class="custom-select">
+                                @foreach (var misc in miscList)
+                                {
+                                    <option value="@misc.CONFIG_MISC_ID">@misc.MISC_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ports</label>
+                            <select name="ports" id="ports" class="custom-select">
+                                @foreach (var ports in portsList)
+                                {
+                                    <option value="@ports.CONFIG_PORTS_ID">@ports.PORTS_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Power</label>
+                            <select name="power" id="power" class="custom-select">
+                                @foreach (var power in powerList)
+                                {
+                                    <option value="@power.CONFIG_POWER_ID">@power.POWER_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Processor</label>
+                            <select name="processor" id="processor" class="custom-select">
+                                @foreach (var processor in processorList)
+                                {
+                                    <option value="@processor.CONFIG_PROCESSOR_ID">@processor.PROCESSOR_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Storage</label>
+                            <select name="storage" id="storage" class="custom-select">
+                                @foreach (var storage in storageList)
+                                {
+                                    <option value="@storage.CONFIG_STORAGE_ID">@storage.STORAGE_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <!-- /Config Item select boxes -->
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Edit PC Model</h1>
+            @Html.ValidationSummary()
+        </div>
+
+        <!-- Navigation Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Model Details</h6>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("EditPcModel", "ManagePcModel")" method="post" class="form-group">
+                        <div class="mb-3">
+                            <label class="form-label">PC Series</label>
+                            <select name="series" id="series" class="custom-select">
+                                @foreach (var series in seriesList)
+                                {
+                                    if (series == selectedModel.PC_SERIES_ID)
+                                    {
+                                        <option value="@series.PC_SERIES_ID" selected="selected">@series.PC_SERIES_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@series.PC_SERIES_ID">@series.PC_SERIES_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <input type="hidden" name="pcModelId" id="pcModelId" value="@selectedModel.PC_MODEL_ID" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">PC Model Name</label>
+                            <input type="text" name="modelName" id="modelName" placeholder="Name..." value="@selectedModel.PC_MODEL_NAME" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">PC Model Description (Optional)</label>
+                            <input type="text" name="modelDesc" id="modelDesc" placeholder="Description..." value="@selectedModel.PC_MODEL_DESCRIPTION" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Model Price (Overrides Sum of Component Prices)</label>
+                            <input type="number" name="price" id="price" min="0" max="9999999" step="0.01" class="form-control" value="@selectedModel.MODEL_PRICE.ToString("0.##")" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quantity</label>
+                            <input type="number" name="quantity" id="quantity" min="0" max="9999" step="1" class="form-control" value="@selectedModel.QUANTITY" required>
+                        </div>
+
+                        <!-- Config Item select boxes -->
+                        <div class="mb-3">
+                            <label class="form-label">Casing</label>
+                            <select name="casing" id="casing" class="custom-select">
+                                @foreach (var casing in casingList)
+                                {
+                                    if (casing == selectedModel.CONFIG_CASING_ID)
+                                    {
+                                        <option value="@casing.CONFIG_CASING_ID" selected="selected">@casing.CASING_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@casing.CONFIG_CASING_ID">@casing.CASING_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Display</label>
+                            <select name="display" id="display" class="custom-select">
+                                @foreach (var display in displayList)
+                                {
+                                    if (display == selectedModel.CONFIG_DISPLAY_ID)
+                                    {
+                                        <option value="@display.CONFIG_DISPLAY_ID" selected="selected">@display.DISPLAY_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@display.CONFIG_DISPLAY_ID">@display.DISPLAY_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Graphics</label>
+                            <select name="graphics" id="graphics" class="custom-select">
+                                @foreach (var graphics in graphicsList)
+                                {
+                                    if (graphics == selectedModel.CONFIG_GRAPHICS_ID)
+                                    {
+                                        <option value="@graphics.CONFIG_GRAPHICS_ID" selected="selected">@graphics.GRAPHICS_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@graphics.CONFIG_GRAPHICS_ID">@graphics.GRAPHICS_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Memory</label>
+                            <select name="memory" id="memory" class="custom-select">
+                                @foreach (var memory in memoryList)
+                                {
+                                    if (memory == selectedModel.CONFIG_MEMORY_ID)
+                                    {
+                                        <option value="@memory.CONFIG_MEMORY_ID" selected="selected">@memory.MEMORY_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@memory.CONFIG_MEMORY_ID">@memory.MEMORY_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Misc</label>
+                            <select name="misc" id="misc" class="custom-select">
+                                @foreach (var misc in miscList)
+                                {
+                                    if (misc == selectedModel.CONFIG_MISC_ID)
+                                    {
+                                        <option value="@misc.CONFIG_MISC_ID" selected="selected">@misc.MISC_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@misc.CONFIG_MISC_ID">@misc.MISC_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ports</label>
+                            <select name="ports" id="ports" class="custom-select">
+                                @foreach (var ports in portsList)
+                                {
+                                    if (ports == selectedModel.CONFIG_PORTS_ID)
+                                    {
+                                        <option value="@ports.CONFIG_PORTS_ID" selected="selected">@ports.PORTS_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@ports.CONFIG_PORTS_ID">@ports.PORTS_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Power</label>
+                            <select name="power" id="power" class="custom-select">
+                                @foreach (var power in powerList)
+                                {
+                                    if (power == selectedModel.CONFIG_POWER_ID)
+                                    {
+                                        <option value="@power.CONFIG_POWER_ID" selected="selected">@power.POWER_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@power.CONFIG_POWER_ID">@power.POWER_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Processor</label>
+                            <select name="processor" id="processor" class="custom-select">
+                                @foreach (var processor in processorList)
+                                {
+                                    if (processor == selectedModel.CONFIG_PROCESSOR_ID)
+                                    {
+                                        <option value="@processor.CONFIG_PROCESSOR_ID" selected="selected">@processor.PROCESSOR_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@processor.CONFIG_PROCESSOR_ID">@processor.PROCESSOR_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Storage</label>
+                            <select name="storage" id="storage" class="custom-select">
+                                @foreach (var storage in storageList)
+                                {
+                                    if (storage == selectedModel.CONFIG_STORAGE_ID)
+                                    {
+                                        <option value="@storage.CONFIG_STORAGE_ID" selected="selected">@storage.STORAGE_NAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@storage.CONFIG_STORAGE_ID">@storage.STORAGE_NAME</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <!-- /Config Item select boxes -->
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" id="status" class="custom-select">
+                                @foreach (var status in Enum.GetValues(typeof(AppConstants.MainStatuses)))
+                                {
+                                    if (status.ToString() == selectedModel.PC_MODEL_STATUS)
+                                    {
+                                        <option value="@status" selected="selected">@status</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@status">@status</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</body>

@@ -13,5 +13,14 @@
             ACT,
             INA
         }
+
+        public enum OrderStatuses 
+        {
+            CANCELLED,
+            PENDING,
+            ASSEMBLING,
+            EN_ROUTE,
+            COMPLETED
+        }
     }
 }

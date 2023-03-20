@@ -18,7 +18,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="AdminDashboard" asp-action="Index">
@@ -39,6 +39,89 @@
                 </a>
             </li>
 
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Manage System
+            </div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                   aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-desktop"></i>
+                    <span>Master Data</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Master Data:</h6>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowPcCategories">PC Categories</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowPcSeries">PC Series</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowPcModel">PC Models</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Transactions</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Transaction Data:</h6>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowOrder">Orders</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowPayment">Payments</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                   aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Config Items</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Config Items:</h6>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigCasing">Casings</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigDisplay">Displays</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigGraphics">Graphics Devices</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigMemory">Memory Devices</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigMisc">Misc Items</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigPorts">Port Types</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigPower">Power Devices</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigProcessor">Processors</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowConfigStorage">Storage Devices</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Generate Reports
+            </div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                   aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-fw fa-chart-bar"></i>
+                    <span>Reports</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Report Types:</h6>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowOrderReport">Order History</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowPaymentReport">Payment History</a>
+                        <a class="collapse-item" asp-controller="AdminHome" asp-action="ShowPcModelReport">PC Models</a>
+                    </div>
+                </div>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -79,7 +162,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                <a class="dropdown-item" asp-controller="Auth" asp-action="Index">
+                                <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

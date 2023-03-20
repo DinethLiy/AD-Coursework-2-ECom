@@ -24,6 +24,7 @@ namespace eComMaster.Business.Services.Auth
 			_jwtAuth = jwtAuth;
 		}
 
+		// Sends the user to their designated homepage if the username and password match
 		public string LoginUser(string username, string password)
 		{
 			EncryptDecryptText encryptDecryptText = new();
@@ -62,6 +63,7 @@ namespace eComMaster.Business.Services.Auth
 			return privilegeType;
 		}
 
+		// Returns the logged in user stored in the Cookie (Cookie provides the accessToken)
 		public AuthUser? GetLoggedInUser(string accessToken) 
 		{
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -72,6 +74,8 @@ namespace eComMaster.Business.Services.Auth
                 .FirstOrDefault();
         }
 
+		// On succesful login, the user is stored in a JWT, and that JWT is stored in a cookie.
+		// This method creates the cookie and returns the user's privilege type for authentication.
 		private string LoggedInUserAuthentication(AuthUser foundAccount)
 		{
 			token = _jwtAuth.JwtAuthentication(foundAccount);
@@ -89,6 +93,7 @@ namespace eComMaster.Business.Services.Auth
 			return role;
 		}
 
+		// Provides the user's relevant dashboard/home controller (to be used in a RedirectToAction function)
 		private string RedirectToDashboard(string? role)
 		{
 			if (role == "SUPER_ADMIN")

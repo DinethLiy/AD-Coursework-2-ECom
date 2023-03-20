@@ -1,6 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Admin";
+
+    dynamic? pendingOrders = TempData["pendingOrders"];
+    dynamic? outOfStockModels = TempData["outOfStockModels"];
+    dynamic? monthlyOrders = TempData["monthlyOrders"];
+    dynamic? monthlyRevenue = TempData["monthlyRevenue"];
 }
 <body>
     <!-- Page Heading -->
@@ -8,6 +13,91 @@
         <h1 class="h3 mb-0 text-gray-800">Admin Home</h1>
     </div>
     <div class="col">
+
+        <!-- Admin Dashboard Info Cards -->
+        <div class="row">
+
+            <!-- Pending Orders card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Pending Orders
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@pendingOrders</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Out of Stock PC Models Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                    Out of Stock PC Models
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@outOfStockModels</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-cubes fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Orders Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    Orders (Monthly)
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@monthlyOrders</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Revenue Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Revenue (Monthly)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@monthlyRevenue</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Navigation Card -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -15,38 +105,59 @@
             </div>
             <div class="card-body">
                 <!-- Navigation Buttons -->
+                <h6 class="h5 mb-0 text-gray-800">Master Data Management</h6>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowPcCategories">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>PC Categories
+                    <i class="fas fa-desktop fa-fw me-3"></i>PC Categories
                 </a>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowPcSeries">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>PC Series
-                </a> <br>
+                    <i class="fas fa-laptop fa-fw me-3"></i>PC Series
+                </a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowPcModel">
+                    <i class="fas fa-cubes fa-fw me-3"></i>PC Models
+                </a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowOrder">
+                    <i class="fas fa-shopping-cart fa-fw me-3"></i>Orders
+                </a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowPayment">
+                    <i class="fas fa-money-bill fa-fw me-3"></i>Payments
+                </a> <br><br>
+                <h6 class="h5 mb-0 text-gray-800">Config Item Management</h6>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigCasing">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Casing
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Casing
                 </a>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigDisplay">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Display
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Display
                 </a>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigGraphics">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Graphics
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Graphics
                 </a>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigMemory">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Memory
-                </a> <br>
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Memory
+                </a> <br><br>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigMisc">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Misc
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Misc
                 </a>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigPorts">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Ports
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Ports
                 </a>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigPower">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Power
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Power
                 </a>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigProcessor">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Processor
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Processor
                 </a>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowConfigStorage">
-                    <i class="fas fa-user-shield fa-fw me-3"></i>Config Storage
+                    <i class="fas fa-cog fa-fw me-3"></i>Config Storage
+                </a> <br><br>
+                <h6 class="h5 mb-0 text-gray-800">Generate Reports</h6>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowOrderReport">
+                    <i class="fas fa-chart-bar fa-fw me-3"></i>Order History Report
+                </a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowPaymentReport">
+                    <i class="fas fa-chart-line fa-fw me-3"></i>Payment History Report
+                </a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminHome" asp-action="ShowPcModelReport">
+                    <i class="fas fa-file-alt fa-fw me-3"></i>PC Model Report
                 </a>
             </div>
         </div>
