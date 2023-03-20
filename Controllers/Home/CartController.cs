@@ -1,6 +1,7 @@
 ﻿using eComMaster.Models.MasterData;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,13 +24,7 @@ namespace YourNamespace.Controllers
             // Get the PC model details from the sessionStorage object
             var pcModel = GetPCModelFromSessionStorage();
 
-            // If the PC model is not found in the sessionStorage, redirect to PC Model index page
-            if (pcModel == null)
-            {
-                return RedirectToAction("Index", "PcModel");
-            }
-
-            return View(pcModel);
+            return View("../../Views/Home/Cart/Index",pcModel);
         }
 
         [HttpPost]
@@ -81,5 +76,9 @@ namespace YourNamespace.Controllers
             // Remove the PC model from the sessionStorage object
             HttpContext.Session.Remove("pcModel");
         }
-    }
+       
+      
+        }
+
+    
 }

@@ -1,27 +1,63 @@
 ﻿<h1>PC Model Details</h1>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-<div class="card">
-    <div class="card-header">
-        <h5 class="card-title">PC_MODEL_ID: @Model.PC_MODEL_ID</h5>
-    </div>
-    <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">PC_MODEL_NAME: @Model.PC_MODEL_NAME</h6>
-        <p class="card-text">PC_MODEL_DESCRIPTION: @Model.PC_MODEL_DESCRIPTION</p>
-        <p class="card-text">MODEL_PRICE: @Model.MODEL_PRICE</p>
-        <p class="card-text">QUANTITY: @Model.QUANTITY</p>
-        <div class="form-group">
-            <label for="quantity">Quantity:</label>
-            <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/Home">eComMaster</a>
+
+            <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-primary mx-2">Cart <span class="badge bg-secondary"></span></a>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex ms-auto" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+    </nav>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">PC_MODEL_ID: @Model.PC_MODEL_ID</h5>
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">PC_MODEL_NAME: @Model.PC_MODEL_NAME</h6>
+            <p class="card-text">PC_MODEL_DESCRIPTION: @Model.PC_MODEL_DESCRIPTION</p>
+            <p class="card-text">MODEL_PRICE: @Model.MODEL_PRICE</p>
+            <p class="card-text">QUANTITY: @Model.QUANTITY</p>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" onclick="addToCart()" id="addToCartBtn">Add to Cart</button>
+            <a href="@Url.Action("Index", "PcModel", new { seriesId = Model.PC_SERIES_ID })" class="btn btn-secondary">Back to Models</a>
+            <a href="@Url.Action("Index", "Cart")" class="btn btn-success">View Cart</a>
         </div>
     </div>
-    <div class="card-footer">
-        <button class="btn btn-primary" onclick="addToCart()" id="addToCartBtn">Add to Cart</button>
-        <a href="@Url.Action("Index", "PcModel", new { seriesId = Model.PC_SERIES_ID })" class="btn btn-secondary">Back to Models</a>
-        <a href="@Url.Action("Index", "Cart")" class="btn btn-success">View Cart</a>
-    </div>
-</div>
 
-<script>
+    <script>
     // Check if the PC model is already in the cart when the page loads
     if (typeof(Storage) !== "undefined" && sessionStorage.getItem('pcModel')) {
         var pcModel = JSON.parse(sessionStorage.getItem('pcModel'));
@@ -46,7 +82,7 @@
             if (existingPcModel.id == pcModel.id) {
                 // Remove the PC model from the cart
                 sessionStorage.removeItem('pcModel');
-
+                sessionStorage.removeItem('count_cart');
                 // Update the button text
                 document.getElementById('addToCartBtn').innerText = 'Add to Cart';
 
@@ -59,8 +95,9 @@
         // Store the PC model details in sessionStorage
         if (typeof(Storage) !== "undefined") {
             sessionStorage.setItem('pcModel', JSON.stringify(pcModel));
-
+            sessionStorage.setItem('count_cart', document.getElementById('quantity').value)
             // Update the button text
+
             document.getElementById('addToCartBtn').innerText = 'Remove from Cart';
 
             // Alert the user that the PC model was added to the cart
@@ -69,4 +106,6 @@
             alert('Sorry, your browser does not support web storage. Please upgrade your browser or try a different one.');
         }
     }
-</script>
+    </script>
+    </body>
+</html>
