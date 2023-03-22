@@ -43,7 +43,7 @@
         <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">PC_MODEL_NAME: @Model.PC_MODEL_NAME</h6>
             <p class="card-text">PC_MODEL_DESCRIPTION: @Model.PC_MODEL_DESCRIPTION</p>
-            <p class="card-text">MODEL_PRICE: @Model.MODEL_PRICE</p>
+            <p class="card-text">MODEL_PRICE: @Model.MODEL_PRICE.ToString("0.00")</p>
             <p class="card-text">QUANTITY: @Model.QUANTITY</p>
             <div class="form-group">
                 <label for="quantity">Quantity:</label>
@@ -72,7 +72,7 @@
             id: @Model.PC_MODEL_ID,
             name: '@Model.PC_MODEL_NAME',
             description: '@Model.PC_MODEL_DESCRIPTION',
-            price: @Model.MODEL_PRICE,
+            price: @Model.MODEL_PRICE.ToString("0.00"),
             quantity: document.getElementById('quantity').value
         };
 

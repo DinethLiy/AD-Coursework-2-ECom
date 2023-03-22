@@ -46,4 +46,7 @@
     <None Remove="Views\Home\PcModel\" />
     <None Remove="Views\Home\Cart\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Home\Pay\Sample.cshtml" />
+  </ItemGroup>
 </Project>
