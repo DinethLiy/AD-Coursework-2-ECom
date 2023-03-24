@@ -33,5 +33,7 @@ namespace eComMaster.Data
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Payment> Payment { get; set; }
+        public DbSet<CheckoutModel> CheckoutModel { get; set; }
+
     }
 }
