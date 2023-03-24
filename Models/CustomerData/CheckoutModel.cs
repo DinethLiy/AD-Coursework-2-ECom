@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eComMaster.Models.CustomerData
 {
@@ -18,7 +19,9 @@ namespace eComMaster.Models.CustomerData
         public string? ShippingCity { get; set; }
         public string? ShippingState { get; set; }
         public string? ShippingZip { get; set; }
-        public string orderId { get; set; }
+
+        [ForeignKey("Order")]
+        public int orderId { get; set; }
 
         public bool SameAddress { get; set; }
 

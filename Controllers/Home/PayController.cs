@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using eComMaster.Business.Interfaces.Auth;
 using eComMaster.Data.Utility;
 using eComMaster.Models.MasterData;
 using Microsoft.AspNetCore.Authorization;
@@ -16,6 +17,13 @@ namespace eComMaster.Controllers.Home
     [Authorization(RequiredPrivilegeType = "CUSTOMER")]
     public class PayController : Controller
     {
+        private readonly IAuthService _authService;
+
+        public PayController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
         public ActionResult Index(string pcModel, string count)
         {
             var pcModelObject = JsonConvert.DeserializeObject(pcModel);
@@ -23,17 +31,7 @@ namespace eComMaster.Controllers.Home
             // Store the pcModel and count values in ViewData to pass them to the view
             ViewData["pcModel"] = pcModelObject;
             ViewData["count"] = count;
-           // Console.WriteLine("hii");
-
-//            @{
-//                // Get the pcModel and count values from the ViewData
-//                var pcModel = ViewData["pcModel"];
-//                var count = ViewData["count"];
-//            }
-
-//< h1 > Index Page </ h1 >
-//< p > pcModel: @pcModel </ p >
-//< p > count: @count </ p >
+          
             return View("../../Views/Home/Pay/Index");
         }
         // GET: Pay
@@ -56,52 +54,13 @@ namespace eComMaster.Controllers.Home
         [HttpPost]
         public ActionResult Checkout(Microsoft.AspNetCore.Http.IFormCollection form)
         {
-            // Get the search parameters from the URL
-
-            //string billingName = form["billing_name"];
-            //string billingAddress = form["billing_address"];
-            //string billingCity = form["billing_city"];
-            //string billingState = form["billing_state"];
-            //string billingZip = form["billing_zip"];
-
-            //string shippingName = form["shipping_name"];
-            //string shippingAddress = form["shipping_address"];
-            //string shippingCity = form["shipping_city"];
-            //string shippingState = form["shipping_state"];
-            //string shippingZip = form["shipping_zip"];
-
-            //string paymentMethod = form["payment_method"];
-
             ViewBag.FormCollection = form;
             // Do something with the form data
 
             //  return RedirectToAction("Confirmation");
             return View("../../Views/Home/Pay/Checkout");
         }
-        public ActionResult Test()
-        {
-            return View("../../Views/Home/Pay/Test");
-        }
-        // POST: Pay
-        //[HttpPost]
-        //public ActionResult Index(FormCollection form)
-        //{
-        //    // Retrieve form values
-        //    string nameOnCard = form["name"];
-        //    string cardNumber = form["card-number"];
-        //    string expiry = form["expiry"];
-        //    string cvv = form["cvv"];
-        //    string streetAddress = form["street-address"];
-        //    string city = form["city"];
-        //    string state = form["state"];
-        //    string zipCode = form["zip-code"];
-
-        //    // Process payment and save billing information
-
-        //    // Redirect to success page
-        //    return RedirectToAction("PaymentSuccess");
-        //}
-
+       
         [HttpPost]
         public IActionResult Index(string billing_name, string billing_address, string billing_city, string billing_state, string billing_zip,
            string shipping_name, string shipping_address, string shipping_city, string shipping_state, string shipping_zip,
@@ -112,30 +71,16 @@ namespace eComMaster.Controllers.Home
 
             return RedirectToAction("Confirmation");
         }
+        [HttpPost]
+        public IActionResult SecuredPay(IFormCollection form) {
+            string accessToken = Request.Cookies["access_token"];
+            var user = _authService.GetLoggedInUser(accessToken);
+            TempData["Message"] = user.USER_ID;
 
-        //[HttpPost]
-        //public IActionResult Checkout(FormCollection form)
-        //{
-            // create a new instance of your model
-            //var model = new CheckoutViewModel();
 
-            //// retrieve the form values and assign them to the model properties
-            //model.BillingName = form["billing_name"];
-            //model.BillingAddress = form["billing_address"];
-            //model.BillingCity = form["billing_city"];
-            //model.BillingState = form["billing_state"];
-            //model.BillingZip = form["billing_zip"];
-            //model.ShippingName = form["shipping_name"];
-            //model.ShippingAddress = form["shipping_address"];
-            //model.ShippingCity = form["shipping_city"];
-            //model.ShippingState = form["shipping_state"];
-            //model.ShippingZip = form["shipping_zip"];
-            //model.PaymentMethod = form["payment_method"];
-
-            // pass the model to the next view
-            //return View("Confirmation", model);
-      //  }
-
+            return View("../../Views/Home/Pay/SecuredPay");
+                }
+      
         public ActionResult PaymentSuccess()
         {
             return View();
@@ -144,59 +89,3 @@ namespace eComMaster.Controllers.Home
 }
 
 
-
-//public class CheckoutController : Controller
-//{
-//    [HttpPost]
-//    public IActionResult Index(CheckoutViewModel model)
-//    {
-//        if (ModelState.IsValid)
-//        {
-//            // Save the checkout details to the database or do other processing here
-//            return RedirectToAction("ThankYou");
-//        }
-
-//        return View(model);
-//    }
-
-//    public IActionResult ThankYou()
-//    {
-//        return View();
-//    }
-//}
-
-//public class CheckoutViewModel
-//{
-//    // Billing Address
-//    [Required]
-//    public string BillingName { get; set; }
-
-//    [Required]
-//    public string BillingAddress { get; set; }
-
-//    [Required]
-//    public string BillingCity { get; set; }
-
-//    [Required]
-//    public string BillingState { get; set; }
-
-//    [Required]
-//    public string BillingZip { get; set; }
-
-//    // Shipping Address
-//    public bool SameAddress { get; set; }
-
-//    public string ShippingName { get; set; }
-
-//    public string ShippingAddress { get; set; }
-
-//    public string ShippingCity { get; set; }
-
-//    public string ShippingState { get; set; }
-
-//    public string ShippingZip { get; set; }
-
-//    // Payment Method
-//    [Required]
-//    public string PaymentMethod { get; set; }
-//}

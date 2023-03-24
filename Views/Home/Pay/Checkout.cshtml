@@ -38,7 +38,8 @@
 
 </head>
 <body>
-    @{string final_price = "0"; }
+    @{string final_price = "0";
+        }
     @{
         var formCollection = ViewBag.FormCollection as Microsoft.AspNetCore.Http.IFormCollection;
 
@@ -90,7 +91,7 @@
             </div>
             <br/>
             @if (formCollection["same_address"] == "on")
-            {
+                {
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">Billing name: @formCollection["billing_name"]</h5>
@@ -104,9 +105,9 @@
                     </div>
 
                 </div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">Shipping name: @formCollection["shipping_name"]</h5>
@@ -120,7 +121,7 @@
                     </div>
 
                 </div>
-            }
+                }
 
         }
         else
@@ -140,7 +141,60 @@
                     <div class="tab-content">
                         <!-- credit card info-->
                         <div id="credit-card" class="tab-pane fade show active pt-3">
-                            <form role="form">
+                            <form action="SecuredPay" method="POST">
+
+
+
+                                @{
+
+
+
+                                    var jsonString2 = formCollection["pcModel"];
+                                    // Manually parse the JSON string into a JObject
+
+                                    dynamic pcModel2 = Newtonsoft.Json.Linq.JObject.Parse(jsonString2);
+
+                                    // Access the properties of the JObject
+                                    string id2 = pcModel2.id;
+                                    string name2 = pcModel2.name;
+                                    string description2 = pcModel2.description;
+                                    decimal price2 = pcModel2.price;
+                                    int quantity2 = pcModel2.quantity;
+
+
+                                    string billing_name = formCollection["billing_name"];
+                                    string billing_address = formCollection["billing_address"];
+                                    string billing_city = formCollection["billing_city"];
+                                    string billing_province = formCollection["billing_state"];
+                                    string billing_zip = formCollection["billing_zip"];
+
+                                    string shipping_name = formCollection["billing_name"];
+                                    string shipping_address = formCollection["billing_address"];
+                                    string shipping_city = formCollection["billing_city"];
+                                    string shipping_province = formCollection["billing_state"];
+                                    string shipping_zip = formCollection["billing_zip"];
+                                    @if (formCollection["same_address"] == "on")
+                                    {
+                                        shipping_name = formCollection["shipping_name"];
+                                        shipping_address = formCollection["shipping_address"];
+                                        shipping_city = formCollection["shipping_city"];
+                                        shipping_province = formCollection["shipping_state"];
+                                        shipping_zip = formCollection["shipping_zip"];
+                                    }
+
+                                }
+
+                                @Html.Hidden("billing_name", billing_name)
+                                @Html.Hidden("billing_address", billing_address)
+                                @Html.Hidden("billing_city", billing_city)
+                                @Html.Hidden("billing_province", billing_province)
+                                @Html.Hidden("billing_zip", billing_zip)
+                                @Html.Hidden("shipping_name", shipping_name)
+                                @Html.Hidden("shipping_address", shipping_address)
+                                @Html.Hidden("shipping_city", shipping_city)
+                                @Html.Hidden("shipping_province", shipping_province)
+                                @Html.Hidden("shipping_zip", shipping_zip)
+                                @Html.Hidden("same_address", formCollection["same_address"])
                                 <div class="form-group">
                                     <label for="username">
                                         <h6>Card Owner</h6>
