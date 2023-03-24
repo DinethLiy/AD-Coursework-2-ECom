@@ -7,7 +7,7 @@ namespace eComMaster.Models.CustomerData
 	public class CheckoutModel
 	{
         [Key]
-        public string CHECKOUT_ID { get; set; }
+        public int CHECKOUT_ID { get; set; }
         public string? NameBilling { get; set; }
         public string? BillingAddress { get; set; }
         public string? BillingCity { get; set; }
@@ -21,8 +21,8 @@ namespace eComMaster.Models.CustomerData
         public string? ShippingZip { get; set; }
 
         [ForeignKey("Order")]
-        public int orderId { get; set; }
-
+        public int ORDER_ID { get; set; }
+        public Order Order { get; set; }
         public bool SameAddress { get; set; }
 
         public string PaymentMethod { get; set; }

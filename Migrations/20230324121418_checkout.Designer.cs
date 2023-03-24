@@ -11,8 +11,8 @@ using eComMaster.Data;
 namespace eComMaster.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230324100246_checkou")]
-    partial class checkou
+    [Migration("20230324121418_checkout")]
+    partial class checkout
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

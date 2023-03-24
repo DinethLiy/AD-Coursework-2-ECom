@@ -4,7 +4,7 @@
 
 namespace eComMaster.Migrations
 {
-    public partial class checkou : Migration
+    public partial class checkout : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
