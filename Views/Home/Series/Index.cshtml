@@ -14,23 +14,24 @@
             </button>
             <a class="navbar-brand" href="/Home">eComMaster</a>
 
-            <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-primary mx-2">Cart <span class="badge bg-secondary"></span></a>
-
+          
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/Home">Home</a>
+                            <a class="nav-link" aria-current="page" href="/Home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="/Home/Orders">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
+                            <a class="nav-link" href="/Home/Account">My Account</a>
                         </li>
                     </ul>
+                    <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-primary mx-2">Cart <span class="badge bg-secondary"></span></a>
+
                     <form class="d-flex ms-auto" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>

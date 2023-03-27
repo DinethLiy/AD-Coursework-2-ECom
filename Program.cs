@@ -90,6 +90,7 @@ builder.Services.AddScoped<IManageConfigStorageService, ManageConfigStorageServi
 builder.Services.AddScoped<IManageHomeService, ManageHomeService>();
 builder.Services.AddScoped<IManageSeriesService, ManageSeriesService>();
 builder.Services.AddScoped<IManageModelService, ManageModelService>();
+builder.Services.AddScoped<iManageCheckoutService, ManageCheckoutService>();
 
 // Build App
 var app = builder.Build();

@@ -94,13 +94,13 @@
                 {
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Billing name: @formCollection["billing_name"]</h5>
+                        <h5 class="card-title">Shipping name: @formCollection["billing_name"]</h5>
                     </div>
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted">Billing address : @formCollection["billing_address"]</h6>
-                        <p class="card-text">Billing city: @formCollection["billing_city"]</p>
-                        <p class="card-text">Billing province: @formCollection["billing_state"]</p>
-                        <p class="card-text">Billing zip: @formCollection["billing_zip"]</p>
+                        <p class="card-text">Shipping city: @formCollection["billing_city"]</p>
+                        <p class="card-text">Shipping province: @formCollection["billing_state"]</p>
+                        <p class="card-text">Shipping zip: @formCollection["billing_zip"]</p>
 
                     </div>
 
@@ -195,6 +195,8 @@
                                 @Html.Hidden("shipping_province", shipping_province)
                                 @Html.Hidden("shipping_zip", shipping_zip)
                                 @Html.Hidden("same_address", formCollection["same_address"])
+                                @Html.Hidden("final_price", final_price)
+                                @Html.Hidden("pcModel", formCollection["pcModel"])
                                 <div class="form-group">
                                     <label for="username">
                                         <h6>Card Owner</h6>

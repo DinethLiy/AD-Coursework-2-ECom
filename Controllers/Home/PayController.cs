@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using eComMaster.Business.Interfaces.Auth;
+using eComMaster.Business.Interfaces.Home;
 using eComMaster.Data.Utility;
+using eComMaster.Models.CustomerData;
 using eComMaster.Models.MasterData;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +20,12 @@ namespace eComMaster.Controllers.Home
     public class PayController : Controller
     {
         private readonly IAuthService _authService;
+        private readonly iManageCheckoutService _manageCheckoutService;
 
-        public PayController(IAuthService authService)
+        public PayController(IAuthService authService, iManageCheckoutService iManageCheckoutService)
         {
             _authService = authService;
+            _manageCheckoutService = iManageCheckoutService;
         }
 
         public ActionResult Index(string pcModel, string count)
@@ -55,9 +59,9 @@ namespace eComMaster.Controllers.Home
         public ActionResult Checkout(Microsoft.AspNetCore.Http.IFormCollection form)
         {
             ViewBag.FormCollection = form;
-            // Do something with the form data
+            // sending previously received form data including billing, shipping and product information
 
-            //  return RedirectToAction("Confirmation");
+            
             return View("../../Views/Home/Pay/Checkout");
         }
        
@@ -74,9 +78,10 @@ namespace eComMaster.Controllers.Home
         [HttpPost]
         public IActionResult SecuredPay(IFormCollection form) {
             string accessToken = Request.Cookies["access_token"];
-            var user = _authService.GetLoggedInUser(accessToken);
-            TempData["Message"] = user.USER_ID;
 
+            string result = _manageCheckoutService.makeOrder(form, accessToken, _authService);
+            
+        
 
             return View("../../Views/Home/Pay/SecuredPay");
                 }
