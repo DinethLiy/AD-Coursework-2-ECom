@@ -27,6 +27,7 @@ namespace eComMaster.Controllers.Home
            
             return View("../../Views/Home/PcModel/Index", _manageModelService.GetPcModels(pcSeriesId));
         }
+
         // GET: PcModel/View/5
         public ActionResult View(int id)
         {

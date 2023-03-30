@@ -84,11 +84,11 @@ namespace eComMaster.Controllers.Home
         
 
             return View("../../Views/Home/Pay/SecuredPay");
-                }
+             }
       
         public ActionResult PaymentSuccess()
         {
-            return View();
+            return View("../../Views/Home/Pay/Success");
         }
     }
 }

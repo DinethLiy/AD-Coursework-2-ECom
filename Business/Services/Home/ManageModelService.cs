@@ -17,7 +17,8 @@ namespace eComMaster.Business.Services.Home
         public List<PcModel> GetPcModels(int pcSeriesId) {
 
             var modelList = _context.PcModel
-            .Where(x => x.DELETED_BY == null && x.PC_MODEL_STATUS != "INA" && x.CREATED_BY.PRIVILEGE_TYPE == "ADMIN")
+            .Where(x => x.DELETED_BY == null && x.PC_MODEL_STATUS != "INA" &&
+            x.CREATED_BY.PRIVILEGE_TYPE == "ADMIN")
             .Include(x => x.PC_SERIES_ID)
   
             .ToList();

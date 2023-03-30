@@ -10,6 +10,9 @@ using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Asn1.Ocsp;
 using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace eComMaster.Business.Services.Home
 {
 	public class ManageCheckoutService: iManageCheckoutService
@@ -29,7 +32,13 @@ namespace eComMaster.Business.Services.Home
             public decimal price { get; set; }
             public int quantity { get; set; }
         }
-
+        public string Create([Bind("ORDER_ID,PC_MODEL_ID,CUSTOMER_ID,ORDER_AMOUNT,ORDER_STATUS,CREATED_DATE,MODIFIED_DATE,DELETED_DATE")] Order order)
+        {
+           
+            _applicationDbContext.Add(order);
+            return "success";
+            
+        }
         public string makeOrder(IFormCollection form, string token, IAuthService _authService)
         {
             var user = _authService.GetLoggedInUser(token);
@@ -40,46 +49,41 @@ namespace eComMaster.Business.Services.Home
             int id = jsonObj.id;
             if (id == null)
             {
+                
                 return "error";
             }
+
+
+         
+            int customerId = user.USER_ID;
+            decimal orderAmount = decimal.Parse(form["final_price"]);
+
+         
+            Customer customer = _applicationDbContext.Customer.Find(customerId);
+            PcModel pcModel = _applicationDbContext.PcModel.Find(id);
+            var id_pc_model = pcModel.PC_MODEL_ID;
+
+           // Create a new order object with the necessary data
+           Order order = new Order
+           {
+               
+               PC_MODEL_ID = id_pc_model,
+               CUSTOMER_ID = user.USER_ID,
             
+               ORDER_AMOUNT = orderAmount,
+               ORDER_STATUS = "PENDING",
+               CREATED_BY = user,
+               CREATED_DATE = DateTime.Now
+           };
 
-            //if (pcModelIdToken != null)
-            //{
-            //    string pcModelId = pcModelIdToken.Value<string>();
-            //    // Do something with pcModelId
-            //}
-            //else
-            //{
-            //    // Handle the case where the key does not exist in the JObject
-            //}
+            // Add the order object to the context and save changes to the database
+            _applicationDbContext.Order.Add(order);
+            _applicationDbContext.SaveChanges();
 
-            //// Retrieve the necessary data from the form
-            ////int pcModelId = int.Parse(form["PC_MODEL_ID"]);
-            //int customerId = user.USER_ID;
-            //decimal orderAmount = decimal.Parse(form["final_price"]);
-
-            //// Retrieve the corresponding PC model and customer from the database
-            ////PcModel pcModel = form;
-            //Customer customer = _context.Customers.Find(customerId);
-
-            //// Create a new order object with the necessary data
-            //Order order = new Order
-            //{
-            //    PcModel = pcModel,
-            //    Customer = customer,
-            //    ORDER_AMOUNT = orderAmount,
-            //    ORDER_STATUS = "PENDING"
-            //};
-
-            //// Add the order object to the context and save changes to the database
-            //_context.Orders.Add(order);
-            //_context.SaveChanges();
-
-            //// Redirect to the current page after a delay with the form data as a post request
+            // Redirect to the current page after a delay with the form data as a post request
             //string redirectUrl = Request.Headers["Referer"].ToString();
             //TempData["formData"] = form;
-            return "";
+            return "Success";
         }
     }
 }

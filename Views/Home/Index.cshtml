@@ -12,7 +12,7 @@
             </button>
             <a class="navbar-brand" href="/Home">eComMaster</a>
 
-           
+
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
 
@@ -50,7 +50,8 @@
                 </div>
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">PC_CATEGORY_NAME: @category.PC_CATEGORY_NAME</h6>
-                    <p class="card-text">PC_CATEGORY_DESCRIPTION: @category.PC_CATEGORY_DESCRIPTION</p>
+                    <p class="card-text">PC_CATEGORY_DESCRIPTION: @category.PC_CATEGORY_DESCRIPTION.Substring(0, Math.Min(10,
+                                                                 @category.PC_CATEGORY_DESCRIPTION.Length))@(category.PC_CATEGORY_DESCRIPTION.Length > 10 ? "..." : "")</p>
                 </div>
                 <div class="card-footer">
                     <a href="@Url.Action("Index", "Series", new { categoryId = category.PC_CATEGORY_ID })" class="btn btn-primary">Show Available Series</a>

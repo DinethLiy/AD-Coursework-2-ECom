@@ -9,5 +9,10 @@ namespace eComMaster.Controllers.Customer
            
             return View("../../Views/CustomerProfile/CustomerProfileView");
         }
+        public IActionResult Create()
+        {
+
+            return View("../../Views/CustomerProfile/Create");
+        }
     }
 }
