@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using eComMaster.Business.Interfaces.Auth;
 using eComMaster.Business.Interfaces.Home;
+using eComMaster.Business.Services.Home;
 using eComMaster.Data.Utility;
 using eComMaster.Models.CustomerData;
 using eComMaster.Models.MasterData;
@@ -21,22 +22,33 @@ namespace eComMaster.Controllers.Home
     {
         private readonly IAuthService _authService;
         private readonly iManageCheckoutService _manageCheckoutService;
-
-        public PayController(IAuthService authService, iManageCheckoutService iManageCheckoutService)
+        private readonly IManageProfileService _manageProfileService;
+        public PayController(IAuthService authService, iManageCheckoutService iManageCheckoutService, IManageProfileService manageProfileService)
         {
+            this._manageProfileService = manageProfileService;
             _authService = authService;
             _manageCheckoutService = iManageCheckoutService;
         }
 
         public ActionResult Index(string pcModel, string count)
         {
-            var pcModelObject = JsonConvert.DeserializeObject(pcModel);
 
-            // Store the pcModel and count values in ViewData to pass them to the view
-            ViewData["pcModel"] = pcModelObject;
-            ViewData["count"] = count;
-          
-            return View("../../Views/Home/Pay/Index");
+            string accessToken = Request.Cookies["access_token"];
+            if (_manageProfileService.customerID(accessToken) != "ACT")
+            {
+                return View("../../Views/CustomerProfile/Create");
+            }
+            else
+            {
+
+                var pcModelObject = JsonConvert.DeserializeObject(pcModel);
+
+                // Store the pcModel and count values in ViewData to pass them to the view
+                ViewData["pcModel"] = pcModelObject;
+                ViewData["count"] = count;
+
+                return View("../../Views/Home/Pay/Index");
+            }
         }
         // GET: Pay
         [HttpPost]

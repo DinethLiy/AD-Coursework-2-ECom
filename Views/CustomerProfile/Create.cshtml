@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@model eComMaster.Models.CustomerData.Customer;
+
+@{
+    ViewData["Title"] = "Create";
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,18 +37,33 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">Create your E-COM profile today!</h2>
-                    <form method="POST">
+                    <form method="POST" action="@Url.Action("Save", "CustomerProfile")">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">first name</label>
-                                    <input class="input--style-4" type="text" name="first_name">
+                                    <label   class="label">Name</label>
+                                    <input asp-for="NAME" class="input--style-4" type="text" name="name">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">last name</label>
-                                    <input class="input--style-4" type="text" name="last_name">
+                                    <label class="label">ID Number</label>
+                                    <input asp-for="NIC" class="input--style-4" type="text" name="NIC">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Address</label>
+                                    <input asp-for="ADDRESS" class="input--style-4" type="text" name="ADDRESS">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Status</label>
+                                    <input asp-for="CUSTOMER_STATUS" readonly class="input--style-4" value="ACT" type="text" name="status">
                                 </div>
                             </div>
                         </div>
@@ -52,7 +72,7 @@
                                 <div class="input-group">
                                     <label class="label">Birthday</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <input asp-for="DOB" class="input--style-4 js-datepicker" type="text" name="birthday">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
@@ -63,12 +83,12 @@
                                     <div class="p-t-10">
                                         <label class="radio-container m-r-45">
                                             Male
-                                            <input type="radio" checked="checked" name="gender">
+                                            <input type="radio" asp-for="GENDER" value="Male" checked="checked" name="gender">
                                             <span class="checkmark"></span>
                                         </label>
                                         <label class="radio-container">
                                             Female
-                                            <input type="radio" name="gender">
+                                            <input type="radio" asp-for="GENDER" value="Female" name="gender">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -79,30 +99,30 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email">
+                                    <input asp-for="EMAIL" class="input--style-4" type="email" name="EMAIL">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Phone Number</label>
-                                    <input class="input--style-4" type="text" name="phone">
+                                    <input asp-for="CONTACT_NUM" class="input--style-4" type="text" name="CONTACT_NUM">
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group">
-                            <label class="label">Subject</label>
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="subject">
-                                    <option disabled="disabled" selected="selected">Choose option</option>
-                                    <option>Subject 1</option>
-                                    <option>Subject 2</option>
-                                    <option>Subject 3</option>
-                                </select>
-                                <div class="select-dropdown"></div>
-                            </div>
-                        </div>
+                        @*<div class="input-group">
+                                <label class="label">Subject</label>
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select name="subject">
+                                        <option disabled="disabled" selected="selected">Choose option</option>
+                                        <option>Subject 1</option>
+                                        <option>Subject 2</option>
+                                        <option>Subject 3</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>*@
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                            <button class="btn btn--radius-2 btn--blue" type="submit">SAVE</button>
                         </div>
                     </form>
                 </div>
