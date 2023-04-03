@@ -38,6 +38,7 @@
     <Folder Include="Views\Home\Series\" />
     <Folder Include="Views\Home\PcModel\" />
     <Folder Include="Views\Home\Cart\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +49,7 @@
     <None Remove="Views\Home\Series\" />
     <None Remove="Views\Home\PcModel\" />
     <None Remove="Views\Home\Cart\" />
+    <None Remove="Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Home\Pay\Sample.cshtml" />

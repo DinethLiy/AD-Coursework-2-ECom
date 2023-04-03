@@ -8,6 +8,7 @@ namespace eComMaster.Business.Interfaces.Home
 		string CreateCustomerProfile(Customer customer, string accessToken);
 		string customerID(string accessToken);
         string findCustomerID(string accessToken);
+        string findCustomerEmail(string accessToken);
     }
 }
 

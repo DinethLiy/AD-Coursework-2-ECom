@@ -10,6 +10,7 @@ using eComMaster.Data.Utility;
 using eComMaster.Models.CustomerData;
 using eComMaster.Models.MasterData;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -23,11 +24,13 @@ namespace eComMaster.Controllers.Home
         private readonly IAuthService _authService;
         private readonly iManageCheckoutService _manageCheckoutService;
         private readonly IManageProfileService _manageProfileService;
-        public PayController(IAuthService authService, iManageCheckoutService iManageCheckoutService, IManageProfileService manageProfileService)
+        private readonly IEmailSender _mail;
+        public PayController(IAuthService authService, iManageCheckoutService iManageCheckoutService, IManageProfileService manageProfileService, IEmailSender mail)
         {
             this._manageProfileService = manageProfileService;
             _authService = authService;
             _manageCheckoutService = iManageCheckoutService;
+            _mail = mail;
         }
 
         public ActionResult Index(string pcModel, string count)
@@ -88,9 +91,10 @@ namespace eComMaster.Controllers.Home
             return RedirectToAction("Confirmation");
         }
         [HttpPost]
-        public IActionResult SecuredPay(IFormCollection form) {
+        public async Task<IActionResult> SecuredPayAsync(IFormCollection form) {
             string accessToken = Request.Cookies["access_token"];
             string customer_id = _manageProfileService.findCustomerID(accessToken);
+            string customer_email = _manageProfileService.findCustomerEmail(accessToken);
 
 
             if (customer_id == null)
@@ -98,7 +102,24 @@ namespace eComMaster.Controllers.Home
                 return View("../../Views/CustomerProfile/Create");
             }
             string result = _manageCheckoutService.makeOrder(form, accessToken, _authService, customer_id);
+            if (result == "success") {
 
+                
+                var email = customer_email;
+                string subject = "E-Com PLC | Your order received";
+                string body = $"We received your order.\nWe will process your order and will update you when your package is ready to delivery.\nE-Com support:\nPhone +94772350923 \nEmail: ecomcomputerscolombo@gmail.com";
+                
+                    try
+                    {
+                        await _mail.SendEmailAsync(email, subject, body);
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError("", "All emails could not be sent due to an internal error!");
+                    }
+
+                
+            }
 
             ViewBag.Message = result;
 
