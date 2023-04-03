@@ -23,6 +23,7 @@ namespace eComMaster.Models.CustomerData
         [ForeignKey("Order")]
         public int ORDER_ID { get; set; }
         public Order Order { get; set; }
+
         public bool SameAddress { get; set; }
 
         public string PaymentMethod { get; set; }

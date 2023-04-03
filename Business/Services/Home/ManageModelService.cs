@@ -83,21 +83,41 @@ namespace eComMaster.Business.Services.Home
         public string AddCustomPcModel(string accessToken, string modelName, string series, string price, string quantity, string casing, string display, string graphics, string memory, string misc, string ports, string power, string processor, string storage, string? modelDesc)
         {
             var foundUser = _authService.GetLoggedInUser(accessToken);
+            double parsedPrice = Double.Parse(price);
+            var PC_SERIES_ID = GetPcSeries(series);
+            var CONFIG_CASING_ID = GetCasing(casing);
+            var CONFIG_DISPLAY_ID = GetDisplay(display);
+            var CONFIG_GRAPHICS_ID = GetGraphics(graphics);
+            var CONFIG_MEMORY_ID = GetMemory(memory);
+            var CONFIG_MISC_ID = GetMisc(misc);
+            var CONFIG_PORTS_ID = GetPorts(ports);
+            var CONFIG_POWER_ID = GetPower(power);
+            var CONFIG_PROCESSOR_ID = GetProcessor(processor);
+            var CONFIG_STORAGE_ID = GetStorage(storage);
+            var finalPrice = parsedPrice + Double.Parse(CONFIG_CASING_ID.BASE_PRICE.ToString())
+            + Double.Parse(CONFIG_DISPLAY_ID.BASE_PRICE.ToString())
+            +Double.Parse(CONFIG_GRAPHICS_ID.BASE_PRICE.ToString())
+            +Double.Parse(CONFIG_MEMORY_ID.BASE_PRICE.ToString())
+            + Double.Parse(CONFIG_MISC_ID.BASE_PRICE.ToString())
+            + Double.Parse(CONFIG_PORTS_ID.BASE_PRICE.ToString())
+            + Double.Parse(CONFIG_POWER_ID.BASE_PRICE.ToString())
+            + Double.Parse(CONFIG_PROCESSOR_ID.BASE_PRICE.ToString())
+            + Double.Parse(CONFIG_STORAGE_ID.BASE_PRICE.ToString());
             PcModel newModel = new()
             {
-                PC_SERIES_ID = GetPcSeries(series),
-                CONFIG_CASING_ID = GetCasing(casing),
-                CONFIG_DISPLAY_ID = GetDisplay(display),
-                CONFIG_GRAPHICS_ID = GetGraphics(graphics),
-                CONFIG_MEMORY_ID = GetMemory(memory),
-                CONFIG_MISC_ID = GetMisc(misc),
-                CONFIG_PORTS_ID = GetPorts(ports),
-                CONFIG_POWER_ID = GetPower(power),
-                CONFIG_PROCESSOR_ID = GetProcessor(processor),
-                CONFIG_STORAGE_ID = GetStorage(storage),
+                PC_SERIES_ID = PC_SERIES_ID,
+                CONFIG_CASING_ID = CONFIG_CASING_ID,
+                CONFIG_DISPLAY_ID = CONFIG_DISPLAY_ID,
+                CONFIG_GRAPHICS_ID = CONFIG_GRAPHICS_ID,
+                CONFIG_MEMORY_ID = CONFIG_MEMORY_ID,
+                CONFIG_MISC_ID = CONFIG_MISC_ID,
+                CONFIG_PORTS_ID = CONFIG_PORTS_ID,
+                CONFIG_POWER_ID = CONFIG_POWER_ID,
+                CONFIG_PROCESSOR_ID = CONFIG_PROCESSOR_ID,
+                CONFIG_STORAGE_ID = CONFIG_STORAGE_ID,
                 PC_MODEL_NAME = modelName,
                 PC_MODEL_DESCRIPTION = modelDesc,
-                MODEL_PRICE = 123456,
+                MODEL_PRICE = Decimal.Parse(finalPrice.ToString()),
                 QUANTITY = 1,
                 PC_MODEL_STATUS = "ACT",
                 CREATED_BY = foundUser,

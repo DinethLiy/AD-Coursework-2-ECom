@@ -149,6 +149,7 @@
 
         <form action="@Url.Action("AddCustomPcModel", "PcModel")" method="post" class="form-group">
             <div class="mb-3">
+                
                 <label class="form-label">PC Series</label>
                 @foreach (var series in seriesList)
                 {
@@ -166,6 +167,7 @@
                 }
 
             </div>
+            <input type="hidden" name="price" value=" @Model.MODEL_PRICE"/>
             <div>
                 <input type="hidden" name="pcModelId" id="pcModelId" value="@selectedModel.PC_MODEL_ID" class="form-control">
             </div>
