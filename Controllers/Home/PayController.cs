@@ -98,8 +98,9 @@ namespace eComMaster.Controllers.Home
                 return View("../../Views/CustomerProfile/Create");
             }
             string result = _manageCheckoutService.makeOrder(form, accessToken, _authService, customer_id);
-            
-        
+
+
+            ViewBag.Message = result;
 
             return View("../../Views/Home/Pay/SecuredPay");
              }

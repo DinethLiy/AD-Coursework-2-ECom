@@ -84,13 +84,77 @@ namespace eComMaster.Business.Services.Home
                 ORDER_ID = orderId,
                 TRANSACTION_DATE = DateTime.Now,
                 PAYMENT_CODE = Guid.NewGuid().ToString(),
-                PAYMENT_STATUS = "PENDING",
+                PAYMENT_STATUS = "PAID",
                 AMOUNT = order.ORDER_AMOUNT
             };
+            _applicationDbContext.Payment.Add(payment);
+            _applicationDbContext.SaveChanges();
+
+            CheckoutModel checkoutModel = new CheckoutModel();
+            checkoutModel.NameBilling = form["billing_name"];
+            checkoutModel.BillingAddress = form["billing_address"];
+            checkoutModel.BillingCity = form["billing_city"];
+            checkoutModel.BillingState = form["billing_province"];
+            checkoutModel.BillingZip = form["billing_zip"];
+            checkoutModel.NameShipping = form["shipping_name"];
+            checkoutModel.ShippingAddress = form["shipping_address"];
+            checkoutModel.ShippingCity = form["shipping_city"];
+            checkoutModel.ShippingState = form["shipping_province"];
+            checkoutModel.ShippingZip = form["shipping_zip"];
+            checkoutModel.ORDER_ID = orderId;
+            checkoutModel.PaymentMethod = "CARD";
+            
+            if (form["same_address"] == "on")
+            {
+                checkoutModel.SameAddress = true;
+            }
+            else
+            {
+                checkoutModel.SameAddress = false;
+            }
+            _applicationDbContext.CheckoutModel.Add(checkoutModel);
+            _applicationDbContext.SaveChanges();
+
+            /*
+             * 
+             *  @Html.Hidden("billing_name", billing_name)
+                                @Html.Hidden("billing_address", billing_address)
+                                @Html.Hidden("billing_city", billing_city)
+                                @Html.Hidden("billing_province", billing_province)
+                                @Html.Hidden("billing_zip", billing_zip)
+                                @Html.Hidden("shipping_name", shipping_name)
+                                @Html.Hidden("shipping_address", shipping_address)
+                                @Html.Hidden("shipping_city", shipping_city)
+                                @Html.Hidden("shipping_province", shipping_province)
+                                @Html.Hidden("shipping_zip", shipping_zip)
+                                @Html.Hidden("same_address", formCollection["same_address"])
+                                @Html.Hidden("final_price", final_price)
+                                @Html.Hidden("pcModel", formCollection["pcModel"])
+                   public int CHECKOUT_ID { get; set; }
+        public string? NameBilling { get; set; }
+        public string? BillingAddress { get; set; }
+        public string? BillingCity { get; set; }
+        public string? BillingState { get; set; }
+        public string? BillingZip { get; set; }
+
+        public string? NameShipping { get; set; }
+        public string? ShippingAddress { get; set; }
+        public string? ShippingCity { get; set; }
+        public string? ShippingState { get; set; }
+        public string? ShippingZip { get; set; }
+
+        [ForeignKey("Order")]
+        public int ORDER_ID { get; set; }
+        public Order Order { get; set; }
+
+        public bool SameAddress { get; set; }
+
+        public string PaymentMethod { get; set; }
+            */
             // Redirect to the current page after a delay with the form data as a post request
             //string redirectUrl = Request.Headers["Referer"].ToString();
             //TempData["formData"] = form;
-            return "Success";
+            return "success";
         }
     }
 }
