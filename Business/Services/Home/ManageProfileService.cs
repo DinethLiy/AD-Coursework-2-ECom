@@ -48,9 +48,10 @@ namespace eComMaster.Business.Services.Home
             {
                 return "error";
             }
-            else {
+            else
+            {
                 var customer = _applicationDbContext.Customer.FirstOrDefault(c => c.USER_ID == foundUser);
-                
+
                 if (customer == null)
                 {
                     return "error";
@@ -58,6 +59,24 @@ namespace eComMaster.Business.Services.Home
                 return customer.CUSTOMER_STATUS.ToString();
             }
         }
+            public string findCustomerID(string accessToken)
+            {
+                var foundUser = _authService.GetLoggedInUser(accessToken);
+                if (foundUser == null)
+                {
+                    return "error";
+                }
+                else
+                {
+                    var customer = _applicationDbContext.Customer.FirstOrDefault(c => c.USER_ID == foundUser);
+
+                    if (customer == null)
+                    {
+                        return "error";
+                    }
+                    return customer.CUSTOMER_ID.ToString();
+                }
+            }
     }
 }
 

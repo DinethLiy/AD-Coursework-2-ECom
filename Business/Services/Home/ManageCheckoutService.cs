@@ -39,7 +39,7 @@ namespace eComMaster.Business.Services.Home
             return "success";
             
         }
-        public string makeOrder(IFormCollection form, string token, IAuthService _authService)
+        public string makeOrder(IFormCollection form, string token, IAuthService _authService, string customerID)
         {
             var user = _authService.GetLoggedInUser(token);
 
@@ -68,7 +68,7 @@ namespace eComMaster.Business.Services.Home
            {
                
                PC_MODEL_ID = id_pc_model,
-               CUSTOMER_ID = user.USER_ID,
+               CUSTOMER_ID = customerId,
             
                ORDER_AMOUNT = orderAmount,
                ORDER_STATUS = "PENDING",
@@ -79,7 +79,14 @@ namespace eComMaster.Business.Services.Home
             // Add the order object to the context and save changes to the database
             _applicationDbContext.Order.Add(order);
             _applicationDbContext.SaveChanges();
-
+            int orderId = order.ORDER_ID;
+            Payment payment = new Payment {
+                ORDER_ID = orderId,
+                TRANSACTION_DATE = DateTime.Now,
+                PAYMENT_CODE = Guid.NewGuid().ToString(),
+                PAYMENT_STATUS = "PENDING",
+                AMOUNT = order.ORDER_AMOUNT
+            };
             // Redirect to the current page after a delay with the form data as a post request
             //string redirectUrl = Request.Headers["Referer"].ToString();
             //TempData["formData"] = form;

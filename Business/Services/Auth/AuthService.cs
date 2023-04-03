@@ -66,12 +66,19 @@ namespace eComMaster.Business.Services.Auth
 		// Returns the logged in user stored in the Cookie (Cookie provides the accessToken)
 		public AuthUser? GetLoggedInUser(string accessToken) 
 		{
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtToken = tokenHandler.ReadJwtToken(accessToken);
-            string? userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value.ToString();
-            return _context.AuthUser
-                .Where(au => au.USER_ID == int.Parse(userId))
-                .FirstOrDefault();
+			try
+			{
+				var tokenHandler = new JwtSecurityTokenHandler();
+				var jwtToken = tokenHandler.ReadJwtToken(accessToken);
+				string? userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value.ToString();
+				return _context.AuthUser
+					.Where(au => au.USER_ID == int.Parse(userId))
+					.FirstOrDefault();
+			}
+			catch (Exception ex) {
+
+				return null; 
+			}
         }
 
 		// On succesful login, the user is stored in a JWT, and that JWT is stored in a cookie.

@@ -90,8 +90,14 @@ namespace eComMaster.Controllers.Home
         [HttpPost]
         public IActionResult SecuredPay(IFormCollection form) {
             string accessToken = Request.Cookies["access_token"];
+            string customer_id = _manageProfileService.findCustomerID(accessToken);
 
-            string result = _manageCheckoutService.makeOrder(form, accessToken, _authService);
+
+            if (customer_id == null)
+            {
+                return View("../../Views/CustomerProfile/Create");
+            }
+            string result = _manageCheckoutService.makeOrder(form, accessToken, _authService, customer_id);
             
         
 

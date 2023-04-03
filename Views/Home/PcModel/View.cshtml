@@ -1,4 +1,20 @@
-﻿<h1>PC Model Details</h1>
+﻿@using eComMaster.Data.Utility
+@{
+  
+    var selectedModel = ViewBag.selectedModel;
+
+    var seriesList = ViewBag.seriesList;
+    var casingList = ViewBag.casingList;
+    var displayList = ViewBag.displayList;
+    var graphicsList = ViewBag.graphicsList;
+    var memoryList = ViewBag.memoryList;
+    var miscList = ViewBag.miscList;
+    var portsList = ViewBag.portsList;
+    var powerList = ViewBag.powerList;
+    var processorList = ViewBag.processorList;
+    var storageList = ViewBag.storageList;
+}
+<h1>PC Model Details</h1>
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -12,7 +28,7 @@
             </button>
             <a class="navbar-brand" href="/Home">eComMaster</a>
 
-           
+
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
 
@@ -56,9 +72,28 @@
             <a href="@Url.Action("Index", "PcModel", new { seriesId = Model.PC_SERIES_ID })"
                class="btn btn-secondary">Back to Models</a>
             <a href="@Url.Action("Index", "Cart")" class="btn btn-success">View Cart</a>
+            <button class="btn btn-primary" onclick="enableCustomize()">Customize</button>
         </div>
     </div>
+    <script>function enableCustomize() {
+   // document.getElementById("series").removeAttribute("disabled");
+     document.getElementById("modelName").removeAttribute("readonly");
+    document.getElementById("modelDesc").removeAttribute("readonly");
+    //document.getElementById("price").removeAttribute("disabled");
+    document.getElementById("casing").removeAttribute("disabled");
+    document.getElementById("display").removeAttribute("disabled");
+    document.getElementById("graphics").removeAttribute("disabled");
+    document.getElementById("memory").removeAttribute("disabled");
+    document.getElementById("misc").removeAttribute("disabled");
+    document.getElementById("ports").removeAttribute("disabled");
+    document.getElementById("power").removeAttribute("disabled");
+    document.getElementById("processor").removeAttribute("disabled");
+    document.getElementById("storage").removeAttribute("disabled");
+    document.getElementById("btnCalculate").removeAttribute("disabled");
+    document.getElementById("btnCalculate").removeAttribute("hidden");
 
+    
+        }</script>
     <script>
     // Check if the PC model is already in the cart when the page loads
     if (typeof(Storage) !== "undefined" && sessionStorage.getItem('pcModel')) {
@@ -109,5 +144,218 @@
         }
     }
     </script>
-</body>
-</html>
+
+    <div style="margin:20px">
+
+        <form action="@Url.Action("AddCustomPcModel", "PcModel")" method="post" class="form-group">
+            <div class="mb-3">
+                <label class="form-label">PC Series</label>
+                @foreach (var series in seriesList)
+                {
+                    if (series == selectedModel.PC_SERIES_ID)
+                    {
+                        <input type="hidden" name="series" value="@series.PC_SERIES_ID" />
+
+                        <div class="form-group">
+                            <label for="series" class="control-label">Series Name: @series.PC_SERIES_NAME</label>
+                            </div>
+
+                        
+                    }
+
+                }
+
+            </div>
+            <div>
+                <input type="hidden" name="pcModelId" id="pcModelId" value="@selectedModel.PC_MODEL_ID" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">PC Model Name</label>
+                <input readonly type="text" name="modelName" id="modelName" placeholder="Name..." value="@selectedModel.PC_MODEL_NAME" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">PC Model Description</label>
+                <input readonly type="text" name="modelDesc" id="modelDesc" placeholder="Description..." value="@selectedModel.PC_MODEL_DESCRIPTION" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Model Price</label>
+                <input readonly type="number" name="price" id="price" min="0" max="9999999" step="0.01" class="form-control" value="@selectedModel.MODEL_PRICE.ToString("0.##")" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Quantity</label>
+                <input readonly type="number" name="quantity" id="quantity" min="0" max="9999" step="1" class="form-control" value="@selectedModel.QUANTITY" required>
+            </div>
+
+            <!-- Config Item select boxes -->
+            <div class="mb-3">
+                <label class="form-label">Casing</label>
+                <select disabled name="casing" id="casing" class="custom-select">
+                    @foreach (var casing in casingList)
+                    {
+                        if (casing == selectedModel.CONFIG_CASING_ID)
+                        {
+                            <option value="@casing.CONFIG_CASING_ID" selected="selected">@casing.CASING_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@casing.CONFIG_CASING_ID">@casing.CASING_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Display</label>
+                <select disabled name="display" id="display" class="custom-select">
+                    @foreach (var display in displayList)
+                    {
+                        if (display == selectedModel.CONFIG_DISPLAY_ID)
+                        {
+                            <option value="@display.CONFIG_DISPLAY_ID" selected="selected">@display.DISPLAY_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@display.CONFIG_DISPLAY_ID">@display.DISPLAY_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Graphics</label>
+                <select disabled name="graphics" id="graphics" class="custom-select">
+                    @foreach (var graphics in graphicsList)
+                    {
+                        if (graphics == selectedModel.CONFIG_GRAPHICS_ID)
+                        {
+                            <option value="@graphics.CONFIG_GRAPHICS_ID" selected="selected">@graphics.GRAPHICS_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@graphics.CONFIG_GRAPHICS_ID">@graphics.GRAPHICS_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Memory</label>
+                <select disabled name="memory" id="memory" class="custom-select">
+                    @foreach (var memory in memoryList)
+                    {
+                        if (memory == selectedModel.CONFIG_MEMORY_ID)
+                        {
+                            <option value="@memory.CONFIG_MEMORY_ID" selected="selected">@memory.MEMORY_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@memory.CONFIG_MEMORY_ID">@memory.MEMORY_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Misc</label>
+                <select disabled name="misc" id="misc" class="custom-select">
+                    @foreach (var misc in miscList)
+                    {
+                        if (misc == selectedModel.CONFIG_MISC_ID)
+                        {
+                            <option value="@misc.CONFIG_MISC_ID" selected="selected">@misc.MISC_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@misc.CONFIG_MISC_ID">@misc.MISC_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ports</label>
+                <select disabled name="ports" id="ports" class="custom-select">
+                    @foreach (var ports in portsList)
+                    {
+                        if (ports == selectedModel.CONFIG_PORTS_ID)
+                        {
+                            <option value="@ports.CONFIG_PORTS_ID" selected="selected">@ports.PORTS_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@ports.CONFIG_PORTS_ID">@ports.PORTS_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Power</label>
+                <select disabled name="power" id="power" class="custom-select">
+                    @foreach (var power in powerList)
+                    {
+                        if (power == selectedModel.CONFIG_POWER_ID)
+                        {
+                            <option value="@power.CONFIG_POWER_ID" selected="selected">@power.POWER_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@power.CONFIG_POWER_ID">@power.POWER_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Processor</label>
+                <select disabled name="processor" id="processor" class="custom-select">
+                    @foreach (var processor in processorList)
+                    {
+                        if (processor == selectedModel.CONFIG_PROCESSOR_ID)
+                        {
+                            <option value="@processor.CONFIG_PROCESSOR_ID" selected="selected">@processor.PROCESSOR_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@processor.CONFIG_PROCESSOR_ID">@processor.PROCESSOR_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Storage</label>
+                <select disabled name="storage" id="storage" class="custom-select">
+                    @foreach (var storage in storageList)
+                    {
+                        if (storage == selectedModel.CONFIG_STORAGE_ID)
+                        {
+
+                            <option value="@storage.CONFIG_STORAGE_ID" selected="selected">@storage.STORAGE_NAME</option>
+                        }
+                        else
+                        {
+                            <option value="@storage.CONFIG_STORAGE_ID">@storage.STORAGE_NAME</option>
+                        }
+                    }
+                </select>
+            </div>
+            <!-- /Config Item select boxes -->
+            @*<div class="mb-3">
+            <label class="form-label">Status</label>
+            <select disabled name="status" id="status" class="custom-select">
+                @foreach (var status in Enum.GetValues(typeof(AppConstants.MainStatuses)))
+                {
+                    if (status.ToString() == selectedModel.PC_MODEL_STATUS)
+                    {
+                        <option value="@status" selected="selected">@status</option>
+                    }
+                    else
+                    {
+                        <option value="@status">@status</option>
+                    }
+                }
+            </select>
+        </div>*@
+            <button hidden disabled name="btnCalculate" id="btnCalculate" class="btn btn-primary">Create Customized Model</button>
+
+        </form>
+        
+       
+    </div>
+
+
+</body >
+</html >
