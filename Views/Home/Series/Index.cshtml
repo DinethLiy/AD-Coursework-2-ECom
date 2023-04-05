@@ -32,8 +32,8 @@
                     </ul>
                     <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-primary mx-2">Cart <span class="badge bg-secondary"></span></a>
 
-                    <form class="d-flex ms-auto" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex ms-auto" role="search" action="@Url.Action("Index", "Search")" method="get">
+                        <input class="form-control me-2" type="search" name="searchTerm" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
