@@ -18,6 +18,18 @@ namespace eComMaster.Controllers.Auth
 			return View("Login");
 		}
 
+		public IActionResult IncorrectLogin() 
+		{
+            ModelState.AddModelError("", "Invalid username or password");
+			return View("Login");
+        }
+
+		public IActionResult AccessDenied() 
+		{
+            ModelState.AddModelError("", "Access Denied");
+            return View("Login");
+        }
+
 		[HttpPost]
 		public RedirectToActionResult Login(string username, string password) 
 		{
@@ -30,7 +42,7 @@ namespace eComMaster.Controllers.Auth
 			else 
 			{
 				ModelState.AddModelError("", "Invalid username or password");
-				return RedirectToAction("Index", "Auth");
+				return RedirectToAction("IncorrectLogin", "Auth");
 			}
 		}
 

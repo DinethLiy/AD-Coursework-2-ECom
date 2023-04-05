@@ -127,7 +127,7 @@ namespace eComMaster.Business.Services.Admin
                     {
                         table.AddCell(new Cell().Add(new Paragraph(model.PC_SERIES_ID.PC_SERIES_NAME)));
                         table.AddCell(new Cell().Add(new Paragraph(model.PC_MODEL_NAME)));
-                        table.AddCell(new Cell().Add(new Paragraph(model.PC_MODEL_DESCRIPTION)));
+                        table.AddCell(new Cell().Add(new Paragraph(GetPcModelDescription(model))));
                         table.AddCell(new Cell().Add(new Paragraph(model.MODEL_PRICE.ToString("0.##"))));
                         table.AddCell(new Cell().Add(new Paragraph(model.QUANTITY.ToString())));
                         table.AddCell(new Cell().Add(new Paragraph(model.CREATED_BY.PRIVILEGE_TYPE)));
@@ -163,7 +163,20 @@ namespace eComMaster.Business.Services.Admin
                     .Where(pm => pm.DELETED_BY == null)
                     .ToList();
             }
-        } 
+        }
+
+        // Handles null values for PC Description, since table cell values cannot be null.
+        private static string GetPcModelDescription(PcModel pcModel) 
+        {
+            if (pcModel.PC_MODEL_DESCRIPTION == null)
+            {
+                return "";
+            }
+            else 
+            {
+                return pcModel.PC_MODEL_DESCRIPTION;
+            }
+        }
 
         // The "Payment History" report
         public MemoryStream GeneratePaymentReport(string pcModelId) 

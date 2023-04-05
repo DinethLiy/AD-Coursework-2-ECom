@@ -21,7 +21,7 @@ namespace eComMaster.Data.Utility
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary {
                 { "Controller", "Auth" },
-                { "Action", "Index" }
+                { "Action", "AccessDenied" }
                     });
                 return;
             }
@@ -43,7 +43,7 @@ namespace eComMaster.Data.Utility
                     filterContext.Result = new RedirectToRouteResult(
                         new RouteValueDictionary {
                     { "Controller", "Auth" },
-                    { "Action", "Index" }
+                    { "Action", "AccessDenied" }
                         });
                 }
             }
@@ -52,7 +52,7 @@ namespace eComMaster.Data.Utility
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary {
                 { "Controller", "Auth" },
-                { "Action", "Index" }
+                { "Action", "AccessDenied" }
                     });
             }
         }
