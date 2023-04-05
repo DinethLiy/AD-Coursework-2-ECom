@@ -8,9 +8,11 @@ using eComMaster.Business.Services.Admin.ConfigItems;
 using eComMaster.Business.Services.Auth;
 using eComMaster.Business.Services.Home;
 using eComMaster.Business.Services.SuperAdmin;
+using eComMaster.Configuration;
 using eComMaster.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -54,12 +56,13 @@ builder.Services.AddSingleton<IJwtSecurityService>(new JwtSecurityService(key));
 // Session-based storage
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
+builder.Services.Configure<MailSettings>(builder.Configuration
+    .GetSection(nameof(MailSettings)));
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpContextAccessor();// Session-based storage
 builder.Services.AddRazorPages();
-builder.Services.AddSession();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddHttpContextAccessor();
+
 
 // Interface-Service initialization
 // Auth
@@ -90,7 +93,10 @@ builder.Services.AddScoped<IManageConfigStorageService, ManageConfigStorageServi
 builder.Services.AddScoped<IManageHomeService, ManageHomeService>();
 builder.Services.AddScoped<IManageSeriesService, ManageSeriesService>();
 builder.Services.AddScoped<IManageModelService, ManageModelService>();
-
+builder.Services.AddScoped<iManageCheckoutService, ManageCheckoutService>();
+builder.Services.AddScoped<IManageProfileService, ManageProfileService>();
+builder.Services.AddScoped<IManageOrdersService, ManageOrdersService>();
+builder.Services.AddScoped<IManageSearchService, ManageSearchService>();
 // Build App
 var app = builder.Build();
 

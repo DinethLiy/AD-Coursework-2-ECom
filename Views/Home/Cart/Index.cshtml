@@ -2,6 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        h3 {
+            margin-left: 20px;
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
@@ -20,26 +25,26 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/Home">Home</a>
+                            <a class="nav-link" aria-current="page" href="/Home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="/Orders">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
+                            <a class="nav-link" href="/Home/Account">My Account</a>
                         </li>
                     </ul>
-                    <form class="d-flex ms-auto" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex ms-auto" role="search" action="@Url.Action("Index", "Search")" method="get">
+                        <input class="form-control me-2" type="search" name="searchTerm" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </div>
     </nav>
+    <h3>Cart</h3>
+    <div class="cart-item" style="margin-left:20px">
 
-    <div class="cart-item">
 
-        <h3>Cart</h3>
 
         <script>if (typeof (Storage) !== "undefined" && sessionStorage.getItem('pcModel')) {
                 var existingPcModel = JSON.parse(sessionStorage.getItem('pcModel'));
@@ -48,10 +53,33 @@
                     document.write("<p>ID: " + pcModel.id + "</p>");
                     document.write("<p>Name: " + pcModel.name + "</p>");
                     document.write("<p>Description: " + pcModel.description + "</p>");
-                    document.write("<p>Price: " + pcModel.price + "</p>");
-                    document.write("<p>Quantity: " + sessionStorage.getItem('cart_count') + "</p>");
-                    document.write("<button onclick='removeFromCart()'>Remove from Cart</button>");
+                    document.write("<p>Unit Price: " + pcModel.price + " LKR</p>");
+                    document.write("<p>Quantity: " + sessionStorage.getItem('count_cart') + "</p>");
+                    document.write("<p>Total Price:" + pcModel.price * sessionStorage.getItem('count_cart').toString("0.00") + " LKR</p>")
+                    document.write("<p>Total price may changed after calculating shipping charges + taxes</p>")
+                    document.write("<button class='btn btn-primary mt-3' onclick='removeFromCart()'>Remove from Cart</button>");
+                    document.write("<button onclick='payNow()' style='margin-left:10px' class='btn btn-primary mt-3'>Pay Now</button>");
                 }
+                function payNow() {
+                    // Get the PC model and count from sessionStorage
+                    var url = 'pay?pcModel=' + encodeURIComponent(JSON.stringify(pcModel)) + '&count=' + encodeURIComponent(sessionStorage.getItem('count_cart'));
+
+                    fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(function (response) {
+                        // Redirect to the payment page URL
+                        window.open(url);
+                    }).catch(function (error) {
+                        console.error('Error:', error);
+                    });
+
+
+                }
+
+
                 function removeFromCart() {
                     if (typeof (Storage) !== "undefined" && sessionStorage.getItem('pcModel')) {
                         var pcModel = JSON.parse(sessionStorage.getItem('pcModel'));
@@ -62,7 +90,7 @@
                     }
                 }
             }</script>
-        </div>
+    </div>
 
 </body>
 </html>

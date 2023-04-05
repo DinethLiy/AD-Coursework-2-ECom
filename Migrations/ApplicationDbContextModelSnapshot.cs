@@ -46,6 +46,59 @@ namespace eComMaster.Migrations
                     b.ToTable("AuthUser");
                 });
 
+            modelBuilder.Entity("eComMaster.Models.CustomerData.CheckoutModel", b =>
+                {
+                    b.Property<int>("CHECKOUT_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("BillingAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BillingCity")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BillingState")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BillingZip")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NameBilling")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NameShipping")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ORDER_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("SameAddress")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ShippingAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ShippingCity")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ShippingState")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ShippingZip")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("CHECKOUT_ID");
+
+                    b.HasIndex("ORDER_ID");
+
+                    b.ToTable("CheckoutModel");
+                });
+
             modelBuilder.Entity("eComMaster.Models.CustomerData.Customer", b =>
                 {
                     b.Property<int>("CUSTOMER_ID")
@@ -1009,6 +1062,17 @@ namespace eComMaster.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("eComMaster.Models.CustomerData.CheckoutModel", b =>
+                {
+                    b.HasOne("eComMaster.Models.CustomerData.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("ORDER_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("eComMaster.Models.CustomerData.Customer", b =>

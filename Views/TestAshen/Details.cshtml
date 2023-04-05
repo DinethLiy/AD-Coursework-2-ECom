@@ -1,0 +1,60 @@
+@model eComMaster.Models.CustomerData.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PcModel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PcModel.PC_MODEL_STATUS)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.CUSTOMER_STATUS)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ORDER_AMOUNT)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ORDER_AMOUNT)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ORDER_STATUS)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ORDER_STATUS)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CREATED_DATE)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CREATED_DATE)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MODIFIED_DATE)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MODIFIED_DATE)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DELETED_DATE)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DELETED_DATE)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ORDER_ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

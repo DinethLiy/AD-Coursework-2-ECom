@@ -1,0 +1,300 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- This script got from frontendfreecode.com -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background: #f5f5f5;
+            margin: 20px;
+        }
+
+        .rounded {
+            border-radius: 1rem;
+        }
+
+        .nav-pills .nav-link {
+            color: #555;
+        }
+
+        .nav-pills .nav-link.active {
+                color: white;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    @{string final_price = "0";
+        }
+    @{
+        var formCollection = ViewBag.FormCollection as Microsoft.AspNetCore.Http.IFormCollection;
+
+        if (formCollection != null)
+        {
+
+            var jsonString = formCollection["pcModel"];
+            // Manually parse the JSON string into a JObject
+
+            dynamic pcModel = Newtonsoft.Json.Linq.JObject.Parse(jsonString);
+
+            // Access the properties of the JObject
+            string id = pcModel.id;
+            string name = pcModel.name;
+            string description = pcModel.description;
+            decimal price = pcModel.price;
+            int quantity = pcModel.quantity;
+
+            final_price = pcModel.price;
+            <div class="card">
+
+                <div class="card-header">
+                    <h5 class="card-title">PC Model ID: @id</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">PC Model Name : @name</h6>
+                    <p class="card-text">PC Model Description: @description</p>
+
+                    <p class="card-text">Price: @price</p>
+
+                    <p class="card-text">Quantity: @quantity</p>
+
+                </div>
+
+            </div>
+            <br />
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Billing name: @formCollection["billing_name"]</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Billing address : @formCollection["billing_address"]</h6>
+                    <p class="card-text">Billing city: @formCollection["billing_city"]</p>
+                    <p class="card-text">Billing province: @formCollection["billing_state"]</p>
+                    <p class="card-text">Billing zip: @formCollection["billing_zip"]</p>
+
+                </div>
+
+            </div>
+            <br/>
+            @if (formCollection["same_address"] == "on")
+                {
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Shipping name: @formCollection["billing_name"]</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Billing address : @formCollection["billing_address"]</h6>
+                        <p class="card-text">Shipping city: @formCollection["billing_city"]</p>
+                        <p class="card-text">Shipping province: @formCollection["billing_state"]</p>
+                        <p class="card-text">Shipping zip: @formCollection["billing_zip"]</p>
+
+                    </div>
+
+                </div>
+                }
+                else
+                {
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Shipping name: @formCollection["shipping_name"]</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Shipping address : @formCollection["shipping_address"]</h6>
+                        <p class="card-text">Shipping city: @formCollection["shipping_city"]</p>
+                        <p class="card-text">Shipping province: @formCollection["shipping_state"]</p>
+                        <p class="card-text">Shipping zip: @formCollection["shipping_zip"]</p>
+
+                    </div>
+
+                </div>
+                }
+
+        }
+        else
+        {
+            <p>Error</p>
+        }
+
+    }
+    <br/>
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <p>Amount: LKR @final_price </p>
+                    <!-- End -->
+                    <!-- Credit card form content -->
+                    <div class="tab-content">
+                        <!-- credit card info-->
+                        <div id="credit-card" class="tab-pane fade show active pt-3">
+                            <form action="SecuredPay" method="POST">
+
+
+
+                                @{
+
+
+
+                                    var jsonString2 = formCollection["pcModel"];
+                                    // Manually parse the JSON string into a JObject
+
+                                    dynamic pcModel2 = Newtonsoft.Json.Linq.JObject.Parse(jsonString2);
+
+                                    // Access the properties of the JObject
+                                    string id2 = pcModel2.id;
+                                    string name2 = pcModel2.name;
+                                    string description2 = pcModel2.description;
+                                    decimal price2 = pcModel2.price;
+                                    int quantity2 = pcModel2.quantity;
+
+
+                                    string billing_name = formCollection["billing_name"];
+                                    string billing_address = formCollection["billing_address"];
+                                    string billing_city = formCollection["billing_city"];
+                                    string billing_province = formCollection["billing_state"];
+                                    string billing_zip = formCollection["billing_zip"];
+
+                                    string shipping_name = formCollection["billing_name"];
+                                    string shipping_address = formCollection["billing_address"];
+                                    string shipping_city = formCollection["billing_city"];
+                                    string shipping_province = formCollection["billing_state"];
+                                    string shipping_zip = formCollection["billing_zip"];
+                                    @if (formCollection["same_address"] == "on")
+                                    {
+                                        shipping_name = formCollection["shipping_name"];
+                                        shipping_address = formCollection["shipping_address"];
+                                        shipping_city = formCollection["shipping_city"];
+                                        shipping_province = formCollection["shipping_state"];
+                                        shipping_zip = formCollection["shipping_zip"];
+                                    }
+
+                                }
+
+                                @Html.Hidden("billing_name", billing_name)
+                                @Html.Hidden("billing_address", billing_address)
+                                @Html.Hidden("billing_city", billing_city)
+                                @Html.Hidden("billing_province", billing_province)
+                                @Html.Hidden("billing_zip", billing_zip)
+                                @Html.Hidden("shipping_name", shipping_name)
+                                @Html.Hidden("shipping_address", shipping_address)
+                                @Html.Hidden("shipping_city", shipping_city)
+                                @Html.Hidden("shipping_province", shipping_province)
+                                @Html.Hidden("shipping_zip", shipping_zip)
+                                @Html.Hidden("same_address", formCollection["same_address"])
+                                @Html.Hidden("final_price", final_price)
+                                @Html.Hidden("pcModel", formCollection["pcModel"])
+                                <div class="form-group">
+                                    <label for="username">
+                                        <h6>Card Owner</h6>
+                                    </label>
+                                    <input type="text" name="username" placeholder="Card Owner Name" required class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardNumber">
+                                        <h6>Card number</h6>
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control" required />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label>
+                                                <span class="hidden-xs">
+                                                    <h6>Expiration Date</h6>
+                                                </span>
+                                            </label>
+                                            <div class="input-group"><input type="number" placeholder="MM" name="" class="form-control" required /> <input type="number" placeholder="YY" name="" class="form-control" required /></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group mb-4">
+                                            <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                                                <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                            </label>
+                                            <input type="text" required class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="submit" class="subscribe btn btn-primary btn-block shadow-sm" value="Confirm Payment" />
+                                    <button type="button" class="btn btn-secondary btn-block shadow-sm" onclick="window.history.back()">Cancel Payment</button>
+                                </div>
+
+                            </form>
+                        </div>
+                        <!-- End -->
+                        <!-- Paypal info -->
+                        <div id="paypal" class="tab-pane fade pt-3">
+                            <h6 class="pb-2">Select your paypal account type</h6>
+                            <div class="form-group">
+                                <label class="radio-inline"> <input type="radio" name="optradio" checked /> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5" />International </label>
+                            </div>
+                            <p>
+                                <button type="button" class="btn btn-primary"><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button>
+                            </p>
+                            <p class="text-muted">
+                                Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order.
+                            </p>
+                        </div>
+                        <!-- End -->
+                        <!-- bank transfer info -->
+                        <div id="net-banking" class="tab-pane fade pt-3">
+                            <div class="form-group">
+                                <label for="Select Your Bank">
+                                    <h6>Select your Bank</h6>
+                                </label>
+                                <select class="form-control" id="ccmonth">
+                                    <option value="" selected disabled>--Please select your Bank--</option>
+                                    <option>Bank 1</option>
+                                    <option>Bank 2</option>
+                                    <option>Bank 3</option>
+                                    <option>Bank 4</option>
+                                    <option>Bank 5</option>
+                                    <option>Bank 6</option>
+                                    <option>Bank 7</option>
+                                    <option>Bank 8</option>
+                                    <option>Bank 9</option>
+                                    <option>Bank 10</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <p>
+                                    <button type="button" class="btn btn-primary"><i class="fas fa-mobile-alt mr-2"></i> Proceed Payment</button>
+                                </p>
+                            </div>
+                            <p class="text-muted">
+                                Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order.
+                            </p>
+                        </div>
+                        <!-- End -->
+                        <!-- End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });</script>
+
+</body>
+</html>

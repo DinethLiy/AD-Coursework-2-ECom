@@ -1,4 +1,5 @@
-﻿using eComMaster.Models.MasterData;
+﻿using eComMaster.Business.Interfaces.Home;
+using eComMaster.Models.MasterData;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -17,10 +18,12 @@ namespace YourNamespace.Controllers
         public CartController(ILogger<CartController> logger)
         {
             _logger = logger;
+          
         }
 
         public IActionResult Index()
         {
+        
             // Get the PC model details from the sessionStorage object
             var pcModel = GetPCModelFromSessionStorage();
 

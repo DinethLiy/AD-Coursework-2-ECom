@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Processing, Please Wait</title>
+    <style>
+        /* Center the spinner vertically and horizontally */
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+            /* Customize the spinner */
+            .spinner .fa-spin {
+                font-size: 50px;
+                color: #007bff;
+            }
+    </style>
+</head>
+<body>
+    <div class="spinner">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+    @*@if (TempData["Message"] != null)
+    {
+        <div>@TempData["Message"]</div>
+    }*@
+    <!-- Your payment processing message goes here -->
+    <p>Processing your payment, please wait...</p>
+    @if (ViewBag.Message == "success")
+        {
+
+
+<script>// Wait for 5 seconds
+                setTimeout(function () {
+                    // Redirect to the desired URL
+                    window.location.href = "/Pay/PaymentSuccess";
+                }, 3000); // 5000 milliseconds = 5 seconds</script>
+        }
+        else {
+            <script>
+                // Go back to the previous page after a delay of 2 seconds
+                setTimeout(function () {
+                    history.back();
+                }, 2000);
+
+            </script>
+        }
+    <!-- Load the FontAwesome icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</body>
+</html>

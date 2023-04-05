@@ -1,0 +1,61 @@
+@model eComMaster.Models.CustomerData.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PC_MODEL_ID" class="control-label"></label>
+                <select asp-for="PC_MODEL_ID" class ="form-control" asp-items="ViewBag.PC_MODEL_ID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CUSTOMER_ID" class="control-label"></label>
+                <select asp-for="CUSTOMER_ID" class ="form-control" asp-items="ViewBag.CUSTOMER_ID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ORDER_AMOUNT" class="control-label"></label>
+                <input asp-for="ORDER_AMOUNT" class="form-control" />
+                <span asp-validation-for="ORDER_AMOUNT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ORDER_STATUS" class="control-label"></label>
+                <input asp-for="ORDER_STATUS" class="form-control" />
+                <span asp-validation-for="ORDER_STATUS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CREATED_DATE" class="control-label"></label>
+                <input asp-for="CREATED_DATE" class="form-control" />
+                <span asp-validation-for="CREATED_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MODIFIED_DATE" class="control-label"></label>
+                <input asp-for="MODIFIED_DATE" class="form-control" />
+                <span asp-validation-for="MODIFIED_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DELETED_DATE" class="control-label"></label>
+                <input asp-for="DELETED_DATE" class="form-control" />
+                <span asp-validation-for="DELETED_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

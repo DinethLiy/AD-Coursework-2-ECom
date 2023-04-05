@@ -19,14 +19,11 @@ namespace eComMaster.Controllers.Home
             this.manageSeriesService = manageSeriesService;
         }
 
-
+        //string jsCode = "<string>alert('Hello World');</script>";
+        //return Content(jsCode, "text/html");
         // GET: /<controller>/
         public IActionResult Index(string categoryId)
         {
-
-            
-            //string jsCode = "<string>alert('Hello World');</script>";
-            //return Content(jsCode, "text/html");
             return View("../../Views/Home/Series/index", manageSeriesService.GetPcSeries(categoryId));
         }
     }

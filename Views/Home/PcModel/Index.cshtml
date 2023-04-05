@@ -12,7 +12,6 @@
             </button>
             <a class="navbar-brand" href="/Home">eComMaster</a>
 
-            <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-primary mx-2">Cart <span class="badge bg-secondary"></span></a>
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
@@ -20,26 +19,38 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/Home">Home</a>
+                            <a class="nav-link" aria-current="page" href="/Home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="/Orders">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
+                            <a class="nav-link" href="/Home/Account">My Account</a>
                         </li>
                     </ul>
-                    <form class="d-flex ms-auto" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-primary mx-2">Cart <span class="badge bg-secondary"></span></a>
+
+                    <form class="d-flex ms-auto" role="search" action="@Url.Action("Index", "Search")" method="get">
+                        <input class="form-control me-2" type="search" name="searchTerm" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </div>
     </nav>
-    <h1>Available Models</h1>
-    <p>Models available for series: @Model.FirstOrDefault()?.PC_SERIES_ID.PC_SERIES_NAME</p>
+    <br />
+    <h3 style="margin-left:10px">Available Models</h3>
+    <p style="margin-left:20px">
+        @if (string.IsNullOrEmpty(Model.FirstOrDefault()?.PC_SERIES_ID?.PC_SERIES_NAME))
+        {
+            <span>No series found</span>
+        }
+        else
+        {
+            <span>Models available for series: @Model.FirstOrDefault().PC_SERIES_ID.PC_SERIES_NAME</span>
+        }
+    </p>
 
-    <div style="overflow-x: scroll; white-space: nowrap;">
+    <div style="overflow-x: scroll; white-space: nowrap; margin-left: 20px;">
         @foreach (var pcModel in Model)
         {
             <div class="card" style="display: inline-block; margin-right: 10px;">
@@ -50,7 +61,6 @@
                     <h6 class="card-subtitle mb-2 text-muted">PC_MODEL_NAME: @pcModel.PC_MODEL_NAME</h6>
                     <p class="card-text">PC_MODEL_DESCRIPTION: @pcModel.PC_MODEL_DESCRIPTION</p>
                     <p class="card-text">MODEL_PRICE: @pcModel.MODEL_PRICE.ToString("0.00")</p>
-
                     <p class="card-text">QUANTITY: @pcModel.QUANTITY</p>
                 </div>
                 <div class="card-footer">
@@ -59,7 +69,9 @@
             </div>
         }
     </div>
+
     <br />
-    <a class="btn btn-secondary" href="@Url.Action("Index", "Home")">Back to series list</a>
+    <a class="btn btn-secondary" style="margin-left: 20px;" href="javascript:history.back()">Back to series list</a>
+
 </body>
 </html>

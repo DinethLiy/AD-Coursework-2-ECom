@@ -1,0 +1,119 @@
+﻿@{
+
+    var Model = ViewBag.Orders;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/Home">eComMaster</a>
+
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/Home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/Orders">Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Account">My Account</a>
+                        </li>
+
+                    </ul>
+                    <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-primary mx-2">Cart <span class="badge bg-secondary"></span></a>
+
+                    <form class="d-flex ms-auto" role="search" action="@Url.Action("Index", "Search")" method="get">
+                        <input class="form-control me-2" type="search" name="searchTerm" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="margin:20px">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Order History</h1>
+        </div>
+
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Orders</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+
+
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th align="center">Cancellation POLICY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <td>@Model.ORDER_ID</td>
+
+
+                                <td>@Model.ORDER_AMOUNT.ToString("0.##")</td>
+                                <td>@Model.ORDER_STATUS</td>
+                                <td>
+                                    @if (Model.ORDER_STATUS == "PENDING" || Model.ORDER_STATUS == "ASSEMBLING")
+                                    {
+
+
+                                        <p>No penalty fee applied.</p>
+                                    }
+                                    else {
+                                    <p>3% will be deducted from the total fee</p>
+                                    }
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <p>After you cancel this order, the amount you paid to the product will be refunded to your bank within 7 working days. Terms and Condition applied.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div style="margin:20px">
+
+        <h2>Cancel Order</h2>
+        <form  asp-action="CancelOrder" method="post">
+            <input type="hidden" id="ORDER_ID" name="ORDER_ID" value="@Model.ORDER_ID" />
+            <div class="form-group">
+                <label>Reason for cancellation</label>
+                <textarea class="form-control"></textarea>
+                <span class="text-danger"></span>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Cancel Order</button>
+        </form>
+    </div>
+</body>
+</html>
+
