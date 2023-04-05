@@ -1,8 +1,6 @@
-﻿@model IEnumerable<eComMaster.Models.CustomerData.Order>
-@{
-    ViewData["Title"] = "View Order History";
-  
-    int orderId = 0;
+﻿@{
+
+    var Model = ViewBag.Orders;
 }
 <!DOCTYPE html>
 <html>
@@ -62,45 +60,59 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
-                                <th>Model</th>
-                         
+
+
                                 <th>Payment</th>
                                 <th>Status</th>
-                                <th>Cancellation</th>
+                                <th align="center">Cancellation POLICY</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var order in Model)
-                            {
-                                orderId = order.ORDER_ID;
-                                <tr>
-                                    <td>@order.ORDER_ID</td>
-                                    <td>@order.PcModel.PC_MODEL_NAME</td>
-                                  
-                                    <td>@order.ORDER_AMOUNT.ToString("0.##")</td>
-                                    <td>@order.ORDER_STATUS</td>
-                                    <td>
-                                        <center>
-                                            <a class="btn btn-info btn-icon-split" asp-action="CancelOrder" asp-route-orderId=@orderId asp-controller="Orders">
-                                                @if (order.ORDER_STATUS.ToString().ToLower() == "pending")
-                                                {
 
-                                                    <span class="text">Cancel Order</span>
-                                                }
-                                                else if(order.ORDER_STATUS.ToString().ToLower() != "cancelled")
-                                                {
-                                                    <span class="text">Cancel Order (Penalty fee applied)</span>
-                                                }
-                                            </a>
-                                        </center>
-                                    </td>
-                                </tr>
-                            }
+
+                            <tr>
+                                <td>@Model.ORDER_ID</td>
+
+
+                                <td>@Model.ORDER_AMOUNT.ToString("0.##")</td>
+                                <td>@Model.ORDER_STATUS</td>
+                                <td>
+                                    @if (Model.ORDER_STATUS == "PENDING" || Model.ORDER_STATUS == "ASSEMBLING")
+                                    {
+
+
+                                        <p>No penalty fee applied.</p>
+                                    }
+                                    else {
+                                    <p>3% will be deducted from the total fee</p>
+                                    }
+                                </td>
+                            </tr>
+
                         </tbody>
                     </table>
+                    <p>After you cancel this order, the amount you paid to the product will be refunded to your bank within 7 working days. Terms and Condition applied.</p>
+
                 </div>
             </div>
         </div>
+    </div>
+
+
+
+    <div style="margin:20px">
+
+        <h2>Cancel Order</h2>
+        <form  asp-action="CancelOrder" method="post">
+            <input type="hidden" id="ORDER_ID" name="ORDER_ID" value="@Model.ORDER_ID" />
+            <div class="form-group">
+                <label>Reason for cancellation</label>
+                <textarea class="form-control"></textarea>
+                <span class="text-danger"></span>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Cancel Order</button>
+        </form>
     </div>
 </body>
 </html>

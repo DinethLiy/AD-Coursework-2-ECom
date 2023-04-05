@@ -5,6 +5,7 @@ using eComMaster.Models.CustomerData;
 using eComMaster.Models.MasterData;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace eComMaster.Business.Services.Admin
 {
@@ -18,7 +19,7 @@ namespace eComMaster.Business.Services.Admin
             _context = context;
             _authService = authService;
         }
-
+       
         public List<Order> GetOrderList()
         {
             return _context.Order
@@ -60,5 +61,6 @@ namespace eComMaster.Business.Services.Admin
                         .Where(o => o.ORDER_ID == int.Parse(orderId))
                         .FirstOrDefault();
         }
+
     }
 }

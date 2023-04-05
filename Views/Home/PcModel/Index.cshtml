@@ -12,7 +12,7 @@
             </button>
             <a class="navbar-brand" href="/Home">eComMaster</a>
 
-            
+
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
 
@@ -39,7 +39,16 @@
     </nav>
     <br />
     <h3 style="margin-left:10px">Available Models</h3>
-    <p style="margin-left:20px">Models available for series: @Model.FirstOrDefault()?.PC_SERIES_ID.PC_SERIES_NAME</p>
+    <p style="margin-left:20px">
+        @if (string.IsNullOrEmpty(Model.FirstOrDefault()?.PC_SERIES_ID?.PC_SERIES_NAME))
+        {
+            <span>No series found</span>
+        }
+        else
+        {
+            <span>Models available for series: @Model.FirstOrDefault().PC_SERIES_ID.PC_SERIES_NAME</span>
+        }
+    </p>
 
     <div style="overflow-x: scroll; white-space: nowrap; margin-left: 20px;">
         @foreach (var pcModel in Model)

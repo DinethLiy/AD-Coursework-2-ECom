@@ -40,6 +40,7 @@
     <Folder Include="Views\Home\Cart\" />
     <Folder Include="Configuration\" />
     <Folder Include="Views\Home\Orders\" />
+    <Folder Include="Views\Home\Search\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +53,7 @@
     <None Remove="Views\Home\Cart\" />
     <None Remove="Configuration\" />
     <None Remove="Views\Home\Orders\" />
+    <None Remove="Views\Home\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Home\Pay\Sample.cshtml" />

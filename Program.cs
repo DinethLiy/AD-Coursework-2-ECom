@@ -96,6 +96,7 @@ builder.Services.AddScoped<IManageModelService, ManageModelService>();
 builder.Services.AddScoped<iManageCheckoutService, ManageCheckoutService>();
 builder.Services.AddScoped<IManageProfileService, ManageProfileService>();
 builder.Services.AddScoped<IManageOrdersService, ManageOrdersService>();
+builder.Services.AddScoped<IManageSearchService, ManageSearchService>();
 // Build App
 var app = builder.Build();
 
