@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using eComMaster.Business.Interfaces.Home;
 using eComMaster.Data;
+using eComMaster.Data.Utility;
+using eComMaster.Models.Auth;
 using eComMaster.Models.MasterData;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +20,8 @@ namespace eComMaster.Business.Services.Home
             List<PcCategory> categories = _context.PcCategory.ToList();
             return categories;
         }
-	}
+        
+
+    }
 }
 
