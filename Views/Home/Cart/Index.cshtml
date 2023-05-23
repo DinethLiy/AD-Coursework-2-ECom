@@ -31,7 +31,7 @@
                             <a class="nav-link" href="/Orders">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Home/Account">My Account</a>
+                            <a class="nav-link" asp-controller="Auth" asp-action="Index">My Account</a>
                         </li>
                     </ul>
                     <form class="d-flex ms-auto" role="search" action="@Url.Action("Index", "Search")" method="get">
