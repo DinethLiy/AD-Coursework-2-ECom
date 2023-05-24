@@ -9,6 +9,7 @@ namespace eComMaster.Business.Interfaces.Home
 		string customerID(string accessToken);
         string findCustomerID(string accessToken);
         string findCustomerEmail(string accessToken);
+        public string SignUpUser(string username, string password);
     }
 }
 

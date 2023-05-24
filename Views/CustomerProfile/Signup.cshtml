@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+<head>
+    <link rel="stylesheet" href="~/loginRegisterTemplate/Login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - E-Com</title>
+</head>
+<div class="wrapper">
+    <div class="logo">
+        <img src="~/img/logo-high-res.png" alt="E-Com Logo">
+    </div>
+    <div class="text-center mt-4 name">
+        E-Com
+    </div>
+    @Html.ValidationSummary()
+    <form class="p-3 mt-3" action="@Url.Action("SignUp", "CustomerProfile")" method="post">
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" name="username" id="username" placeholder="Username">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input type="password" name="password" id="password" placeholder="Password">
+        </div>
+        <button class="btn mt-3" type="submit">Sign Up</button>
+    </form>
+    <button onclick="goBack()">Go Back</button>
+
+    <script>function goBack() {
+            window.history.back();
+        }</script>
+
+    <div class="text-center fs-6">
+        <a class="nav-link text-dark" href="CustomerProfile/SignUp">Sign up</a>
+    </div>
+</div>

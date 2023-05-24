@@ -41,6 +41,8 @@
     <Folder Include="Configuration\" />
     <Folder Include="Views\Home\Orders\" />
     <Folder Include="Views\Home\Search\" />
+    <Folder Include="wwwroot\scss\" />
+    <Folder Include="wwwroot\mail\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,5 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Home\Pay\Sample.cshtml" />
+    <Content Remove="wwwroot\scss\" />
+    <Content Remove="wwwroot\mail\" />
   </ItemGroup>
 </Project>

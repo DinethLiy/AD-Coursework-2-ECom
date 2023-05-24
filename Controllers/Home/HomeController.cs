@@ -22,6 +22,8 @@ namespace eComMaster.Controllers.Home
         // GET: /<controller>/
         public IActionResult Index()
         {
+            string accessToken = Request.Cookies["access_token"] ?? "";
+            ViewData["AccessToken"] = accessToken;
             return View("../../Views/Home/index",_manageHomeService.GetPcCategories());
         }
     }
