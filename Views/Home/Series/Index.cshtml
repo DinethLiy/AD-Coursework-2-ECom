@@ -191,7 +191,8 @@
                             <p class="card-text">PC_SERIES_DESCRIPTION: @series.PC_SERIES_DESCRIPTION</p>
                         </div>
                         <div class="card-footer">
-                            <a class="btn btn-primary" href="@Url.Action("Index", "PcModel", new { seriesId = series.PC_SERIES_ID })">Show available models</a>
+                            <a class="btn btn-primary" href="@Url.Action("Index", "PcModel")?pcSeriesId=@series.PC_SERIES_ID">Show available models</a>
+
                         </div>
                     </div>
                 }
